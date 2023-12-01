@@ -8,7 +8,7 @@ class Solution {
         for (int i = 0; i < nums.length; i++) {
 
             if (numbers.contains(nums[i])) {
-                numbers = numbers.replaceAll(nums[i], String.valueOf(i));
+                numbers = numbers.replace(nums[i], String.valueOf(i));
             }
         }
         
