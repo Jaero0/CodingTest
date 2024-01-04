@@ -16,9 +16,7 @@ class Solution {
                 } else {
                     vertical -= 1;
                 }
-                System.out.println("getInt전 Vertical : " + vertical);
                 vertical = getInt(boardVer, vertical);
-                System.out.println("getInt후 Vertical : " + vertical);
                 continue;
             }
 
@@ -28,9 +26,7 @@ class Solution {
                 } else {
                     horizontal -= 1;
                 }
-                System.out.println("getInt전 horizontal : " + horizontal);
                 horizontal = getInt(boardHor, horizontal);
-                System.out.println("getInt후 horizontal : " + horizontal);
             }
         }
 
@@ -43,7 +39,6 @@ class Solution {
     public int getInt(int mainVal, int line) {
         if (line < (mainVal) * -1) {
             line = (mainVal) * -1;
-            System.out.println(line);
         } else if (line > mainVal) {
             line = mainVal;
         }
