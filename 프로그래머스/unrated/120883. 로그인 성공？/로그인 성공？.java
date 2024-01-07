@@ -12,19 +12,13 @@ class Solution {
 
             if (db[i][0].equals(id)) {
 
-                isAllWrong = false;
-
                 if (db[i][1].equals(pw)) {
 
-                    isPwWrong = false;
-                    break;
+                    return "login";
                 }
+                return "wrong pw";
             }
         }
-
-        if (isAllWrong == true) {
-            return "fail";
-        }
-        return isAllWrong == false && isPwWrong == true ? "wrong pw" : "login";
+        return "fail";
     }
 }
