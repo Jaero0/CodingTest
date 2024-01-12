@@ -1,5 +1,3 @@
-
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -22,7 +20,6 @@ class Solution {
         }
 
         list.sort(Comparator.comparingInt(Solution::extractNumber).thenComparing(Solution::endsWithExclamation));
-        System.out.println(list);
 
         for (int i = 0; i < length; i++) {
 
