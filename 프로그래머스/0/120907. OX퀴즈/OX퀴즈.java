@@ -10,26 +10,10 @@ class Solution {
 
             int f = Integer.parseInt(quizIndArr[0]);
             int s = Integer.parseInt(quizIndArr[2]);
-            
-            boolean plus = true;
 
-            if (quizIndArr[1].equals("-")) {
-                plus = false;
-            }
-            
-            int result = 0;
+            int result = f + s * (quizIndArr[1].equals("+") ? 1 : -1);
 
-            if (plus) {
-                result = f + s;
-            } else {
-                result = f - s;
-            }
-
-            if (result == Integer.parseInt(quizIndArr[4])) {
-                answer[i] = "O";
-            } else {
-                answer[i] = "X";
-            } 
+            answer[i] = result == Integer.parseInt(quizIndArr[4]) ? "O" : "X";
         }
 
         return answer;
