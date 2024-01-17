@@ -10,8 +10,7 @@ class Solution {
 
             for (int i = 0; i < answer.length; i++) {
                 
-                answer[i] = first;
-                first++;
+                answer[i] = first + i;
             }
 
         } else {
@@ -20,8 +19,7 @@ class Solution {
 
             for (int i = 0; i < answer.length; i++) {
 
-                answer[i] = first;
-                first++;
+                answer[i] = first + i;
             }
         }
 
