@@ -1,26 +1,19 @@
 class Solution {
     public int[] solution(int num, int total) {
         int[] answer = new int[num];
-        
+
         int mid = total / num;
+        int first = 0;
 
         if (num % 2 != 0) {
-
-            int first = mid - ((num-1) / 2);
-
-            for (int i = 0; i < answer.length; i++) {
-                
-                answer[i] = first + i;
-            }
-
+            first = mid - ((num-1) / 2);
         } else {
+            first = mid - ((num/2) -1);
+        }
 
-            int first = mid - ((num/2) -1);
+        for (int i = 0; i < answer.length; i++) {
 
-            for (int i = 0; i < answer.length; i++) {
-
-                answer[i] = first + i;
-            }
+            answer[i] = first + i;
         }
 
         return answer;
