@@ -1,7 +1,7 @@
 class Solution {
     public boolean solution(String s) {
         
-        return s.matches("\\d{4}|\\d{6}");
+        return (s.length() == 4 || s.length() == 6) && s.matches("[0-9]+");
 
     }
 }
