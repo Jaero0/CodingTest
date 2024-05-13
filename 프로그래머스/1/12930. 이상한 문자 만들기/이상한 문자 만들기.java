@@ -3,32 +3,29 @@ class Solution {
 
         StringBuilder sb = new StringBuilder();
 
-        String[] arr = s.split(" ", -1);
+        char[] c = s.toCharArray();
 
-        for (String string : arr) {
+        int count = 0;
+        
+        for (int i = 0; i < c.length; i++) {
+            
+            char c1 = c[i];
 
-            if (string.isEmpty()) {
+            if ('a' <= c1 && c1 <= 'z' || 'A' <= c1 && c1 <= 'Z') {
 
-                sb.append(" ");
-            } else {
-
-                char[] chars = string.toCharArray();
-
-                for (int i = 0; i < chars.length; i++) {
-
-                    if (i % 2 == 0) {
-                        sb.append(String.valueOf(chars[i]).toUpperCase());
-                    } else {
-                        sb.append(String.valueOf(chars[i]).toLowerCase());
-                    }
+                if (count % 2 == 0) {
+                    sb.append(String.valueOf(c1).toUpperCase());
+                    count ++;
+                } else {
+                    count = 0;
+                    sb.append(String.valueOf(c1).toLowerCase());
                 }
-
-                sb.append(" ");
+            } else {
+                count = 0;
+                sb.append(c1);
             }
         }
-
-        sb.delete(sb.length() - 1, sb.length());
-
+        
         return sb.toString();
     }
 }
