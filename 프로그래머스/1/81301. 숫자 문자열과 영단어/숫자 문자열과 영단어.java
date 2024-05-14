@@ -5,7 +5,7 @@ class Solution {
 
         for (int i = 0; i < strArr.length; i++) {
 
-            s = s.replaceAll(strArr[i], String.valueOf(i));
+            s = s.replace(strArr[i], String.valueOf(i));
         }
 
         return Integer.parseInt(s);
