@@ -6,7 +6,7 @@ class Solution {
         for (int i = 0; i < strings.length; i++) {
 
             String s = strings[i];
-            String sub = s.substring(n, n + 1);
+            String sub = String.valueOf(s.charAt(n));
             strings[i] = sub + s;
         }
 
