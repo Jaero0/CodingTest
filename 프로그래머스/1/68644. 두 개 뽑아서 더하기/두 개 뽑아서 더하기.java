@@ -4,7 +4,7 @@ class Solution {
     public int[] solution(int[] numbers) {
         int[] answer = {};
 
-        Set<Integer> set = new HashSet<>();
+        Set<Integer> set = new TreeSet<>();
 
         for (int i = 0; i < numbers.length - 1; i++) {
 
@@ -16,6 +16,6 @@ class Solution {
             }
         }
 
-        return set.stream().sorted(Comparator.naturalOrder()).mapToInt(Integer::intValue).toArray();
+        return set.stream().mapToInt(Integer::intValue).toArray();
     }
 }
