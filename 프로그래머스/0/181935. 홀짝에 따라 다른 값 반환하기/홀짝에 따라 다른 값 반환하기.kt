@@ -1,23 +1,13 @@
-import kotlin.math.*
+import kotlin.math.pow
 
 class Solution {
 	fun solution(n: Int): Int {
 		var answer: Int = 0
 
-		if (n % 2 == 0) {
-			for (i in 1..n) {
-				if (i % 2 == 0) {
-					answer += i.toDouble().pow(2).toInt()
-				}
-			}
+		return if (n % 2 == 0) {
+			(n downTo 1 step 2).sumOf() { it.toDouble().pow(2).toInt() }
 		} else {
-			for (i in 1..n) {
-				if (i % 2 != 0) {
-					answer += i
-				}
-			}
+			(n downTo 1 step 2).sum()
 		}
-
-		return answer
 	}
 }
