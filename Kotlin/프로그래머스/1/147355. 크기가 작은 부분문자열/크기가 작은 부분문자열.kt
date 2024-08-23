@@ -6,7 +6,7 @@ class Solution {
 
         for (i in 0..t.length - p.length) {
 
-            val s = t.substring(i..i + p.length-1)
+            val s = t.substring(i until i + p.length)
 
             println(s)
             if (s.toLong() <= pInt) {
