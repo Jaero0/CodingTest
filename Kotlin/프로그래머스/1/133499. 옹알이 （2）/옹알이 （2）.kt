@@ -3,40 +3,22 @@ class Solution {
         var answer: Int = 0
 
         val ayayewooma = arrayOf("aya", "ye", "woo", "ma")
+        val ayaayayeyewoowoomama = arrayOf("ayaaya", "yeye", "woowoo", "mama")
         val babblingCopy = babbling.copyOf() //"ayaye", "uuu", "yeye", "yemawoo", "ayaayaa"
 
         for (i in ayayewooma.indices) {
+            val aya = ayayewooma[i]
+            val ayaaya = ayaayayeyewoowoomama[i]
+
             for (j in babblingCopy.indices) {
-                if (babblingCopy[j].contains(ayayewooma[i])) {
-                    babblingCopy[j] = babblingCopy[j].replace(ayayewooma[i], ("$i "))
+                if (babblingCopy[j].contains(ayaaya)) {
+                    babblingCopy[j] = babblingCopy[j].replace(ayaaya, "1")
+                } else if (babblingCopy[j].contains(aya)) {
+                    babblingCopy[j] = babblingCopy[j].replace(aya, " ")
                 }
             }
         }
 
-
-
-        for (s in babblingCopy) {
-            if (s[0] in '0'..'9') {
-                val trimLastS = s.trimEnd()
-                val splited = trimLastS.split(" ")
-
-                var isSame = false
-                var temp = ""
-
-                for (s1 in splited) {
-                    if (s1 == temp || s1[0] in 'a' .. 'z') {
-                        isSame = true
-                        break
-                    }
-                    temp = s1
-                }
-
-                if (!isSame) {
-                    answer++
-                }
-            }
-        }
-
-        return answer
+        return babblingCopy.count { it.isBlank() }
     }
 }
