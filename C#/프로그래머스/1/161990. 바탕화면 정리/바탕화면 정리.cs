@@ -21,10 +21,7 @@ public class Solution {
             if(minY > y) minY = y;
             if(maxY < y) maxY = y;
             
-            Console.WriteLine(minY + ", " + minX + ", "+(maxY + 1) + ", "+ (maxX + 1));
         }
-        
-        
         
         return new int[] {minY, minX, maxY + 1, maxX + 1};
     }
