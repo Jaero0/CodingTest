@@ -1,11 +1,4 @@
-using System;
 
-namespace Programmers;
-
-public class MainClass
-{
-    static void Main(string[] args)
-    {
         string[] inputs = Console.ReadLine().Split(' ');
 
         int climb = int.Parse(inputs[0]);
@@ -20,5 +13,3 @@ public class MainClass
         //-fall * n + climb * n >= max - fall
         //(climb-fall) * n >= max - fall
         //n = (max - fall) / (climb - fall)
-    }
-}
