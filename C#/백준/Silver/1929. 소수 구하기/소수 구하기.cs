@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace Programmers;
 
@@ -12,8 +10,6 @@ public class MainClass
         string[] inputs = Console.ReadLine().Split(' ');
         int f = int.Parse(inputs[0]);
         int s = int.Parse(inputs[1]);
-
-        
 
         bool[] arr = new bool[s + 1];
         arr[0] = true;
