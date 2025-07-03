@@ -1,6 +1,18 @@
-string[] inputs = Console.ReadLine().Split(' ');
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Programmers;
+
+public class MainClass
+{
+    static void Main(string[] args)
+    {
+        string[] inputs = Console.ReadLine().Split(' ');
         int f = int.Parse(inputs[0]);
         int s = int.Parse(inputs[1]);
+
+        StringBuilder sb = new StringBuilder();
 
         bool[] arr = new bool[s + 1];
         arr[0] = true;
@@ -22,6 +34,10 @@ string[] inputs = Console.ReadLine().Split(' ');
         {
             if (arr[i] == false)
             {
-                Console.WriteLine(i);
+                sb.Append(i + "\n");
             }
         }
+
+        Console.WriteLine(sb.ToString());
+    }
+}
