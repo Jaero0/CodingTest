@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace Programmers;
@@ -12,7 +13,7 @@ public class MainClass
         int f = int.Parse(inputs[0]);
         int s = int.Parse(inputs[1]);
 
-        StringBuilder sb = new StringBuilder();
+        
 
         bool[] arr = new bool[s + 1];
         arr[0] = true;
@@ -30,14 +31,15 @@ public class MainClass
             }
         }
         
+        StreamWriter sw = new(new BufferedStream(Console.OpenStandardOutput()));
         for (int i = f; i <= s; i++)
         {
             if (arr[i] == false)
             {
-                sb.Append(i + "\n");
+                sw.WriteLine(i);
             }
         }
 
-        Console.WriteLine(sb.ToString());
+        sw.Close();
     }
 }
