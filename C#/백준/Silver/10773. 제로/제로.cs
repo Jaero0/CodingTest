@@ -1,11 +1,10 @@
 Stack<int> acc = new Stack<int>();
-        StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
 
-        int count = int.Parse(sr.ReadLine());
+        int count = int.Parse(Console.ReadLine());
 
         for (int i = 0; i < count; i++)
         {
-            int input = int.Parse(sr.ReadLine());
+            int input = int.Parse(Console.ReadLine());
 
             switch (input)
             {
