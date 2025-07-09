@@ -1,8 +1,14 @@
 string s = Console.ReadLine().Replace(" ", "");
 
-        switch (s)
+        if (s.Equals("12345678"))
         {
-            case "12345678": Console.WriteLine("ascending"); break;
-            case "87654321": Console.WriteLine("descending"); break;
-            default: Console.WriteLine("mixed"); break;
+            Console.WriteLine("ascending");
+        }
+        else if (s.Equals("87654321"))
+        {
+            Console.WriteLine("descending");
+        }
+        else
+        {
+            Console.WriteLine("mixed");
         }
