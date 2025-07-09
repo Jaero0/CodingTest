@@ -1,14 +1,8 @@
-int[] inputs = Array.ConvertAll(Console.ReadLine().Split(' '), s => int.Parse(s));
+string s = Console.ReadLine().Replace(" ", "");
 
-        if (inputs[0] < inputs[1] && inputs[1] < inputs[2] && inputs[2] < inputs[3] && inputs[3] < inputs[4] && inputs[4] < inputs[5] && inputs[5] < inputs[6] && inputs[6] < inputs[7])
+        switch (s)
         {
-            Console.WriteLine("ascending");
-        }
-        else if (inputs[0] > inputs[1] && inputs[1] > inputs[2] && inputs[2] > inputs[3] && inputs[3] > inputs[4] && inputs[4] > inputs[5] && inputs[5] > inputs[6] && inputs[6] > inputs[7])
-        {
-            Console.WriteLine("descending");
-        }
-        else
-        {
-            Console.WriteLine("mixed");
+            case "12345678": Console.WriteLine("ascending"); break;
+            case "87654321": Console.WriteLine("descending"); break;
+            default: Console.WriteLine("mixed"); break;
         }
