@@ -1,12 +1,17 @@
-StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
-        StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
-        int input = int.Parse(sr.ReadLine());
+using System.Text;
 
+class Program
+{
+    static void Main(string[] args)
+    {
+        int input = int.Parse(Console.ReadLine());
+
+        StringBuilder sb = new StringBuilder();
+        
         for (int i = 0; i < input; i++)
         {
-            string sin = sr.ReadLine();
-            int sum = 0;
-            int count = 0;
+            string sin = Console.ReadLine();
+            int sum = 0, count = 0;
             
             foreach (var c in sin)
             {
@@ -21,8 +26,9 @@ StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput(
                 }
             }
 
-            sw.WriteLine(sum);
+            sb.Append(sum + "\n");
         }
-        
-        sr.Close();
-        sw.Close();
+
+        Console.WriteLine(sb);
+    }
+}
