@@ -1,11 +1,12 @@
 StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
+        StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
 
-        int gugu = int.Parse(Console.ReadLine());
+        int gugu = int.Parse(sr.ReadLine());
         var list = new List<string>();
 
         for (int i = 0; i < gugu; i++)
         {
-            var readLine = Console.ReadLine();
+            var readLine = sr.ReadLine();
             
             if (list.Contains(readLine))
             {
@@ -32,4 +33,5 @@ StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput
         
         list.ForEach(s => sw.WriteLine(s));
 
+        sr.Close();
         sw.Close();
