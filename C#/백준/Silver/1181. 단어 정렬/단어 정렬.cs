@@ -8,30 +8,28 @@ StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput
         {
             var readLine = sr.ReadLine();
             
-            if (list.Contains(readLine))
+            list.Add(readLine);
+        }
+        
+        list.Sort((a, b) =>
+        {
+            if (a.Length == b.Length)
+            {
+                return a.CompareTo(b);
+            }
+            
+            return a.Length - b.Length;
+        } );
+
+        for (int i = 0; i < gugu; i++)
+        {
+            if (i != 0 && list[i] == list[i - 1])
             {
                 continue;
             }
             
-            list.Add(readLine);
+            sw.WriteLine(list[i]);
         }
-        
-        list.Sort((s1, s2) =>
-        {
-            if (s1.Length < s2.Length)
-            {
-                return -1;
-            }
-
-            if (s1.Length > s2.Length)
-            {
-                return 1;
-            }
-
-            return s1.CompareTo(s2);
-        } );
-        
-        list.ForEach(s => sw.WriteLine(s));
 
         sr.Close();
         sw.Close();
