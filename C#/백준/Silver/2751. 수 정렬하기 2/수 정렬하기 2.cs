@@ -1,16 +1,17 @@
- StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
+StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
         StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
 
         int gugu = int.Parse(sr.ReadLine());
-        var list = new List<int>();
+        var list = new int[gugu];
 
         for (int i = 0; i < gugu; i++)
         {
-            list.Add(int.Parse(sr.ReadLine()));
+            list[i] = int.Parse(sr.ReadLine());
         }
         
-        list.Sort();
+        Array.Sort(list);
 
-        list.ForEach(i => sw.WriteLine(i));
+        Array.ForEach(list, i => sw.WriteLine(i));
+        
         sr.Close();
         sw.Close();
