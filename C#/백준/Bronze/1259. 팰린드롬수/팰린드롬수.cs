@@ -1,11 +1,18 @@
 StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
         StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
 
-        string input = sr.ReadLine();
-        while (!input.Equals("0"))
+        
+        while (true)
         {
             //012345 -> 012 345
             //0123456 -> 012 3 456
+            string input = sr.ReadLine();
+
+            if (input.Equals("0"))
+            {
+                break;
+            }
+            
             var l = input.Length;
 
             bool isDif = false;
@@ -19,8 +26,6 @@ StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput(
             }
 
             sw.WriteLine(isDif ? "no" : "yes");
-
-            input = sr.ReadLine();
         }
 
         sr.Close();
