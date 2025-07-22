@@ -8,7 +8,6 @@ StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput(
             string s = sr.ReadLine();
             
             int openCount = 0;
-            int closeCount = 0;
             bool isClosed = false;
 
             foreach (var ch in s)
@@ -19,11 +18,11 @@ StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput(
                 }
                 else
                 {
-                    closeCount++;
+                    openCount--;
                     
                 }
 
-                if (closeCount > openCount)
+                if (openCount < 0)
                 {
                     sw.WriteLine("NO");
                     isClosed = true;
@@ -36,7 +35,7 @@ StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput(
                 continue;
             }
 
-            sw.WriteLine(openCount - closeCount == 0 ? "YES" : "NO");
+            sw.WriteLine(openCount == 0 ? "YES" : "NO");
         }
         
         sr.Close();
