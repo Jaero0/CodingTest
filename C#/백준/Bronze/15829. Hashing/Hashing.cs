@@ -7,16 +7,16 @@ StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput(
         string s = sr.ReadLine();
 
         long sum = 0;
+        long pow = 1;
         for (int i = 0; i < L; i++)
         {
             int cur = s[i] - 'a' + 1;
 
-            long pow = (long)Math.Pow(r, i);
-
             sum += cur * pow;
+            pow = (pow * r) % 1234567891;
         }
         
-        sw.WriteLine(sum);
+        sw.WriteLine(sum % 1234567891);
         
         sr.Close();
         sw.Close();
