@@ -1,28 +1,21 @@
 StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
         StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
         
-        int L = int.Parse(sr.ReadLine());
+        int n = int.Parse(sr.ReadLine());
+        int[] count = new int[10002];
 
-        var list = new Dictionary<int, int>();
-
-
-        for (int i = 0; i < L; i++)
+        for (int i = 0; i < n; i++)
         {
-            int inp = int.Parse(sr.ReadLine());
-
-            if (!list.TryAdd(inp, 1))
-            {
-                list[inp]++;
-            }
+            int num = int.Parse(sr.ReadLine());
+            count[num]++;
         }
 
-        IOrderedEnumerable<KeyValuePair<int, int>> keyValuePairs = list.OrderBy(kvp => kvp.Key);
-
-        foreach (KeyValuePair<int, int> kvp in keyValuePairs)
+        for (int i = 0; i < 10002; i++)
         {
-            for (int i = 0; i < kvp.Value; i++)
+            while (count[i] > 0)
             {
-                sw.WriteLine(kvp.Key);
+                sw.WriteLine(i);
+                count[i]--;
             }
         }
 
