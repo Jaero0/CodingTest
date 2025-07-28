@@ -11,23 +11,15 @@ StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput(
             return;
         }
 
-        int force = 1665;
+        int force = 666;
+        int count = 1;
 
-        for (int i = 0; i < input - 1; i++)
+        while (count != input)
         {
-            while (true)
+            force++;
+            if (force.ToString().Contains("666"))
             {
-                if (force.ToString().Contains("666"))
-                {
-                    break;
-                }
-
-                force++;
-            }
-
-            if (i != input - 2)
-            {
-                force++;
+                count++;
             }
         }
         
