@@ -22,7 +22,7 @@ int main()
         vec.push_back(make_pair(x,y));
     }
 
-    vector<vector<bool>> square(100, vector<bool>(100));;
+    bool square[100][100] = {false, };
 
     int dim = 0;
 
