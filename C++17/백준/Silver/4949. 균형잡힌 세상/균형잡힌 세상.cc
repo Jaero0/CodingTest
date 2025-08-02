@@ -1,6 +1,36 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+bool IsStringBalanced(const string* s)
+{
+    stack<char> stack;
+
+    for (char c : *s)
+    {
+        if (c == '(' || c == '[')
+        {
+            stack.push(c);
+        }
+        else if (c == ')' || c == ']')
+        {
+            if (stack.empty())
+            {
+                return false;
+            }
+
+            char peek = stack.top();
+            if (c == ')' && peek != '('  || c == ']' && peek != '[' )
+            {
+                return false;
+            }
+
+            stack.pop();
+        }
+    }
+
+    return stack.empty();
+}
+
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -16,68 +46,12 @@ int main()
             break;
         }
 
-        stack<char> stack;
-        char peek;
-        bool isCompatible = true;
-
-        for (char c : s)
-        {
-            switch (c)
-            {
-            case '(':
-                stack.push(c);
-                break;
-            case ')':
-                if (stack.empty())
-                {
-                    isCompatible = false;
-                    break;
-                }
-                peek = stack.top();
-                if (peek != '(')
-                {
-                    isCompatible = false;
-                    break;
-                }
-                stack.pop();
-                break;
-            case '[':
-                stack.push(c);
-                break;
-            case ']':
-                if (stack.empty())
-                {
-                    isCompatible = false;
-                    break;
-                }
-                peek = stack.top();
-                if (peek != '[')
-                {
-                    isCompatible = false;
-                    break;
-                }
-                stack.pop();
-                break;
-            }
-
-            if (isCompatible == false)
-            {
-                break;
-            }
-        }
-
-        if (isCompatible == false || !stack.empty())
-        {
-            cout << "no" << "\n";
-            continue;
-        }
-
-        if (stack.empty())
-        {
-            cout << "yes" << "\n";
-        }
+        cout << (IsStringBalanced(&s) ? "yes" : "no") << "\n";
+        
     }
 
     cout << endl;
     return 0;
 }
+
+
