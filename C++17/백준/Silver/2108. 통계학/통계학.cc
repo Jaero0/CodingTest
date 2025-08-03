@@ -1,6 +1,4 @@
 #include <bits/stdc++.h>
-
-#include <algorithm>
 using namespace std;
 
 int main()
@@ -8,59 +6,47 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    int c; cin >> c;
+    int c;
+    cin >> c;
 
+    vector<int> vec(c);
+    map<int, int> numCount;
     int total = 0;
-    map<int, int> numCountDict;
-    vector<int> vec;
 
     for (int i = 0; i < c; ++i)
     {
-        int temp; cin >> temp;
-
-        total += temp;
-
-        if (numCountDict[temp] != 0)
-        {
-            numCountDict[temp]++;
-        }
-        else
-        {
-            numCountDict[temp] = 1;
-        }
-
-        vec.push_back(temp);
+        cin >> vec[i];
+        total += vec[i];
+        ++numCount[vec[i]];
     }
 
     sort(vec.begin(), vec.end());
 
-    int bigCount = 0;
+    // 평균 (0과 -0 구분 처리)
+    int avg = round((double)total / c);
+    if (avg == -0) avg = 0;
 
-    for (pair<const int, int> p : numCountDict)
-    {
-        bigCount = std::max(p.second, bigCount);
-    }
+    // 중앙값
+    int median = vec[c / 2];
 
-    vector<int> modeVec;
+    // 최빈값 계산
+    int maxFreq = 0;
+    for (const auto& p : numCount)
+        maxFreq = max(maxFreq, p.second);
 
-    for (pair<const int, int> p : numCountDict)
-    {
-        if (bigCount == p.second)
-        {
-            modeVec.push_back(p.first);
-        }
-    }
+    vector<int> modes;
+    for (const auto& p : numCount)
+        if (p.second == maxFreq)
+            modes.push_back(p.first);
 
-    sort(modeVec.begin(), modeVec.end());
+    sort(modes.begin(), modes.end());
+    int mode = (modes.size() > 1) ? modes[1] : modes[0];
 
-    const double avg = static_cast<double>(total) / c;
-    int floored = round(avg);
-    int middle = vec[c/2];
-    int mode = modeVec.size() > 1 ? modeVec[1] : modeVec[0];
-    int range = vec[c - 1] - vec[0];
+    // 범위
+    int range = vec.back() - vec.front();
 
-    cout << (floored == -0 ? 0 : floored)  << "\n" << middle << "\n" << mode << "\n" << range << "\n";
-    
+    // 출력
+    cout << avg << "\n" << median << "\n" << mode << "\n" << range << "\n";
+
     return 0;
-    
 }
