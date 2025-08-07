@@ -1,4 +1,5 @@
 #include "bits/stdc++.h"
+using namespace std;
 
 int main()
 {
@@ -7,20 +8,22 @@ int main()
 
     int c, c1; std:: cin >> c >> c1;
 
-    std::map<std::string, int> map;
+    set<string> set;
 
     for (int i = 0; i < c; ++i)
     {
-        std::string ch; std::cin >> ch;
+        string t; cin >> t;
 
-        map[ch] = i + 100;
+        set.insert(t);
     }
 
     int count = 0;
+
     for (int i = 0; i < c1; ++i)
     {
-        std::string temp; std::cin >> temp;
-        if (map[temp] > 1)
+        string t; cin >> t;
+
+        if (set.count(t))
         {
             count++;
         }
