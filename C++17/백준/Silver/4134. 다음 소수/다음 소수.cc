@@ -9,11 +9,9 @@ int main()
 
     int c; cin >> c;
 
-    vector<int> prime;
-
     for (int i = 0; i < c; ++i)
     {
-        int64_t input; cin >> input;
+        uint32_t input; cin >> input;
 
         if (input <= 2)
         {
@@ -25,7 +23,7 @@ int main()
         {
             bool isPrime = true;
             
-            for (int64_t i = 2; i * i <= input; ++i)
+            for (uint32_t i = 2; i * i <= input; ++i)
             {
                 if (input % i == 0)
                 {
