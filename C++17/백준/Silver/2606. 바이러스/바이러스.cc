@@ -19,7 +19,9 @@ int main()
     nodes.reserve(c);
     for (int i = 0; i < c; ++i)
     {
-        nodes.push_back(new Node());
+        auto val = new Node();
+        val->id = i;
+        nodes.push_back(val);
     }
 
     cin >> c;
@@ -29,9 +31,7 @@ int main()
         int node, infection; cin >> node >> infection;
 
         auto originNode = nodes[node-1];
-        originNode->id = node;
         auto infectionNode = nodes[infection-1];
-        infectionNode->id = infection;
         
         originNode->v_coneccted.push_back(infectionNode);
         infectionNode->v_coneccted.push_back(originNode);
