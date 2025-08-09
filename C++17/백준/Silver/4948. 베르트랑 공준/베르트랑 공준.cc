@@ -1,20 +1,21 @@
 #include "bits/stdc++.h"
 using namespace std;
 
-
-vector<bool> primes(246913);
+#define MAX_NUM 246912
 
 int main()
 {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
+    bool primes[MAX_NUM+ 1] = {false};
+    
     primes[0] = true;
     primes[1] = true;
 
-    for (int i = 2; i * i <= 246913; ++i)
+    for (int i = 2; i * i <= MAX_NUM; ++i)
     {
-        for (int j = i * i; j <= 246913; j += i)
+        for (int j = i * i; j <= MAX_NUM; j += i)
         {
             primes[j] = true;
         }
