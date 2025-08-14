@@ -12,19 +12,18 @@ int main()
     {
         int c1; cin >> c1;
 
-        map<string, vector<string>> cateCloth;
+        map<string, int> cateCloth;
         for (int i = 0; i < c1; ++i)
         {
             string cl, cate; cin >> cl >> cate;
 
-            if (cateCloth[cate].empty())
+            if (cateCloth[cate] == 0)
             {
-                const vector<string> v {cl};
-                cateCloth[cate] = v;
+                cateCloth[cate] = 1;
             }
             else
             {
-                cateCloth[cate].push_back(cl);
+                cateCloth[cate]++;
             }
         }
 
@@ -32,7 +31,7 @@ int main()
 
         for (auto cate_cloth : cateCloth)
         {
-            sum *= (cate_cloth.second.size() + 1);
+            sum *= (cate_cloth.second + 1);
         }
 
         cout << sum - 1 << "\n";
