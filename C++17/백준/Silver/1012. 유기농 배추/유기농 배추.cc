@@ -10,11 +10,11 @@ int main()
 
     for (int i = 0; i < c; ++i)
     {
-        int h,v,c1; cin >> h >> v>> c1;
+        int M, N, Baechu; cin >> M >> N>> Baechu;
 
         bool field[50][50] = {false};
 
-        for (int i = 0; i < c1; ++i)
+        for (int i = 0; i < Baechu; ++i)
         {
             int t, t1; cin >> t >> t1;
 
@@ -25,112 +25,49 @@ int main()
         bool visited[50][50] = {false};
         set<pair<int,int>> visitedNode;
 
-        int id = 0;
+        int BaechuWormCount = 0;
 
-        for (int i = 0; i < h; ++i)
+        for (int i = 0; i < M; ++i)
         {
-            for (int j = 0; j < v; ++j)
+            for (int j = 0; j < N; ++j)
             {
                 if (field[i][j] == true && visited[i][j] == false)
                 {
-                    id++;
+                    BaechuWormCount++;
                     HaveToVisit.emplace(i,j);
                     visitedNode.insert(make_pair(i,j));
                     visited[i][j] = true;
                     
                     while (!HaveToVisit.empty())
                     {
-                        auto pair = HaveToVisit.top();
+                        auto cur = HaveToVisit.top();
                         HaveToVisit.pop();
 
-                        int first = pair.first;
-                        int second = pair.second;
-
-                        bool isVisited = false;
-                        
-                        //up
-                        if (first > 0)
+                        for (int dir = 0; dir < 4; ++dir)
                         {
-                            auto up = make_pair(first-1, second);
-                            if (visitedNode.count(up) == 1)
-                            {
-                                isVisited = true;
-                            }
-                            else
-                            {
-                                visitedNode.insert(up);
-                            }
+                            //up,down,left,right
+                            constexpr int dy[4] = {0, 0, -1, 1};
+                            constexpr int dx[4] = {-1, 1, 0, 0};
                             
-                            if (field[first-1][second] == true && isVisited == false)
-                            {
-                                HaveToVisit.push(up);
-                                visited[first-1][second] = true;
-                            }
-                        }
+                            int newH = cur.first + dx[dir];
+                            int newV = cur.second + dy[dir];
 
-                        isVisited = false;
+                            //범위 벗어나면 체킹안함
+                            if (newH < 0 || newH >= 50 || newV < 0 || newV >= 50) continue;
 
-                        //down
-                        if (first < 49)
-                        {
-                            auto down = make_pair(first+1, second);
-                            if (visitedNode.count(down) == 1)
-                            {
-                                isVisited = true;
-                            }
-                            else
-                            {
-                                visitedNode.insert(down);
-                            }
-                            
-                            if (field[first+1][second] == true && isVisited == false)
-                            {
-                                HaveToVisit.push(down);
-                                visited[first+1][second] = true;
-                            }
-                        }
+                            auto next = make_pair(newH, newV);
 
-                        isVisited = false;
+                            // visitedNode check == false
+                            if (visitedNode.count(next) == 0)
+                            {
+                                visitedNode.insert(next);
 
-                        //left
-                        if (second > 0)
-                        {
-                            auto left = make_pair(first, second-1);
-                            if (visitedNode.count(left) == 1)
-                            {
-                                isVisited = true;
-                            }
-                            else
-                            {
-                                visitedNode.insert(left);
-                            }
-                            
-                            if (field[first][second - 1] == true && isVisited == false)
-                            {
-                                HaveToVisit.push(left);
-                                visited[first][second-1] = true;
-                            }
-                        }
-
-                        isVisited = false;
-                        
-                        //right
-                        if (second < 49)
-                        {
-                            auto right = make_pair(first, second + 1);
-                            if (visitedNode.count(right) == 1)
-                            {
-                                isVisited = true;
-                            }
-                            else
-                            {
-                                visitedNode.insert(right);
-                            }
-                            
-                            if (field[first][second + 1] == true && isVisited == false)
-                            {
-                                HaveToVisit.push(right);
-                                visited[first][second+1] = true;
+                                // field == true && visited == false
+                                if (field[newH][newV] == true && visited[newH][newV] == false)
+                                {
+                                    HaveToVisit.push(next);
+                                    visited[newH][newV] = true;
+                                }
                             }
                         }
                     }
@@ -138,10 +75,8 @@ int main()
             }
         }
 
-        cout << id << "\n";
+        cout << BaechuWormCount << "\n";
     }
     
     return 0;
 }
-
-
