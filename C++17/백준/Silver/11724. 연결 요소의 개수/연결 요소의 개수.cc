@@ -1,6 +1,20 @@
 #include "bits/stdc++.h"
 using namespace std;
 
+void DFS(map<int, vector<int>> &g, int visitingNode, vector<bool> &visited)
+{
+    for (int i : g[visitingNode])
+    {
+        if (visited[i] == true)
+        {
+            continue;
+        }
+        visited[i] = true;
+
+        DFS(g, i, visited);
+    }
+}
+
 int main()
 {
     ios::sync_with_stdio(false);
@@ -9,7 +23,7 @@ int main()
     int N, M; cin >> N >> M;
 
     map<int, vector<int>> graph;
-    vector<bool> visited(N + 1, false); // set -> vector<bool>
+    vector<bool> visited (N+1, false);
 
     for (int i = 0; i < N; ++i)
     {
@@ -21,43 +35,28 @@ int main()
     {
         int t, t1; cin >> t >> t1;
 
+        
         graph[t].push_back(t1);
         graph[t1].push_back(t);
     }
 
     int count = 0;
-    queue<int> HaveToVisit;
 
     for (auto value : graph)
     {
-        if (visited[value.first])
+        if (visited[value.first] == true)
         {
             continue;
         }
-        
-        HaveToVisit.push(value.first);
-        
-        while (!HaveToVisit.empty())
-        {
-            int node = HaveToVisit.front();
-            HaveToVisit.pop();
-
-            if (visited[node])
-            {
-                continue;
-            }
-
-            visited[node] = true;
-            for (int i : graph[node])
-            {
-                HaveToVisit.push(i);
-            }
-        }
+        DFS(graph, value.first ,visited);
+        visited[value.first] = true;
 
         count++;
+        
     }
-    
+
     cout << count;
+    
     
     return 0;
 }
