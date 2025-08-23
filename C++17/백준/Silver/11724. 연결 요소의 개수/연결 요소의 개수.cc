@@ -9,7 +9,7 @@ int main()
     int N, M; cin >> N >> M;
 
     map<int, vector<int>> graph;
-    set<int> visited;
+    vector<bool> visited(N + 1, false); // set -> vector<bool>
 
     for (int i = 0; i < N; ++i)
     {
@@ -21,7 +21,6 @@ int main()
     {
         int t, t1; cin >> t >> t1;
 
-        
         graph[t].push_back(t1);
         graph[t1].push_back(t);
     }
@@ -31,7 +30,7 @@ int main()
 
     for (auto value : graph)
     {
-        if (visited.count(value.first))
+        if (visited[value.first])
         {
             continue;
         }
@@ -43,12 +42,12 @@ int main()
             int node = HaveToVisit.front();
             HaveToVisit.pop();
 
-            if (visited.count(node))
+            if (visited[node])
             {
                 continue;
             }
 
-            visited.insert(node);
+            visited[node] = true;
             for (int i : graph[node])
             {
                 HaveToVisit.push(i);
