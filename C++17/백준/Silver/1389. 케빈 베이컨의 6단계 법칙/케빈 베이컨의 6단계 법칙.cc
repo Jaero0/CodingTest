@@ -68,19 +68,19 @@ int main()
     }
 
     int minc = 1000000000;
+    int small = N + 1;
     for (auto pair : humanCount)
     {
+        int temp = minc;
         minc = std::min(pair.second, minc);
-    }
 
-    for (auto pair : humanCount)
-    {
-        if (pair.second == minc)
+        if (temp != minc)
         {
-            cout << pair.first;
-            return 0;
+            small = pair.first;
         }
     }
+    
+    cout << small;
     
     return 0;
 }
