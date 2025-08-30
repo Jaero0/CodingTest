@@ -1,51 +1,56 @@
 #include "bits/stdc++.h"
 using namespace std;
 
-//5525
 int main()
 {
     int N, S;
     cin >> N >> S;
-
-    string IO;
-    for (int i = 0; i < N; ++i)
-    {
-        IO += "IO";
-    }
-    IO += 'I';
-
+    
     string input; cin >> input;
 
-    int count = 0;
-    for (int i = 0; i < S; ++i)
+    int tempCount = 0;
+    string temp;
+    int lastIdx = 0;
+
+    int realCount = 0;
+    for (int i = 0; i < S - 2; ++i)
     {
-        size_t io_len = IO.length();
-        
-        string t = input.substr(i);
-        string t1 = t;
-
-        if (t1.length() < io_len)
+        if (input[i] == 'I')
         {
-            break;
-        }
+            temp += input[i];
+            temp += input[i+1];
+            temp += input[i+2];
+            
+            if (temp == "IOI")
+            {
+                
+                if (i != lastIdx)
+                {
+                    tempCount = 0;
+                }
+                
+                lastIdx = i+2;
+                
+                tempCount++;
 
-        int find = t.find(IO);
-        if (find < 0)
-        {
-            break;
-        }
-        t1.replace(find, io_len, " ");
+                if (tempCount == N)
+                {
+                    realCount++;
+                    tempCount--;
+                }
 
-        if (t1.length() == t.length())
-        {
-            break;
+                i += 1;
+                temp.clear();
+            }
+            else
+            {
+                tempCount = 0;
+                temp.clear();
+            }
         }
-
-        i += t1.find(' ') + 1;
-        count ++;
     }
 
-    cout << count;
+    cout << realCount;
     
     return 0;
 }
