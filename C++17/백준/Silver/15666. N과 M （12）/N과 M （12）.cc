@@ -5,13 +5,13 @@ int N, M;
 vector<short> nums;
 map<short, short> used;
 
-void BT(int k, vector<short>* v)
+void BT(int k, vector<short>& v)
 {
     if (k == M + 1)
     {
         for (int i = 1; i <= M; ++i)
         {
-            cout << (*v)[i] << " ";
+            cout << v[i] << " ";
         }
         cout << "\n";
         return;
@@ -19,7 +19,7 @@ void BT(int k, vector<short>* v)
 
     for (int i = 0; i < N; ++i)
     {
-        if ((*v)[k - 1] > nums[i])
+        if (v[k - 1] > nums[i])
         {
             continue;
         }
@@ -29,9 +29,9 @@ void BT(int k, vector<short>* v)
             continue;
         }
 
-        (*v)[k] = nums[i];
+        v[k] = nums[i];
         BT(k+1, v);
-        (*v)[k] = 0;
+        v[k] = 0;
     }
 }
 
@@ -49,7 +49,7 @@ int main()
 
     sort(begin(nums), end(nums));
 
-    BT(1, &v);
+    BT(1, v);
     
     return 0;
 }
