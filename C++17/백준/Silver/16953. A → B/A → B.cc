@@ -5,10 +5,8 @@ int main()
 {
     int64_t N, M; cin >> N >> M;
 
-    queue<pair<int64_t, int>> HaveToVisit;
+    queue<pair<int, int>> HaveToVisit;
     HaveToVisit.emplace(N,1);
-    map<int64_t,bool> visited;
-    visited[N] = true;
     
     bool b = false;
     int c = 0;
@@ -22,13 +20,13 @@ int main()
     while (!HaveToVisit.empty())
     {
         auto node = HaveToVisit.front();
-        int64_t num = node.first;
+        int num = node.first;
         int count = node.second;
         HaveToVisit.pop();
         
 
-        int64_t mul = num * 2;
-        int64_t p1 = num * 10 + 1;
+        int mul = num * 2;
+        int64_t p1 = static_cast<int64_t>(num) * 10 + 1;
 
         if (p1 == M || mul == M)
         {
@@ -37,12 +35,12 @@ int main()
             break;
         }
 
-        if (mul < M && visited[mul] == false)
+        if (mul < M)
         {
             HaveToVisit.emplace(mul, count + 1);
         }
         
-        if (p1 < M && visited[p1] == false)
+        if (p1 < M)
         {
             HaveToVisit.emplace(p1, count + 1);
         }
