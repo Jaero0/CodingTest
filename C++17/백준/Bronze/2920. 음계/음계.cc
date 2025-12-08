@@ -1,53 +1,23 @@
-#include "bits/stdc++.h"
+#include <bits/stdc++.h>
 using namespace std;
 
-int main()
-{
+int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    int first = 0;
-    int ascendingSum = 0;
-    int descendingSum = 0;
-    int totalSum = 0;
-    
-    for (int i = 1; i <= 8; ++i)
-    {
-        int input = 0; cin >> input;
+    vector<int> v(8);
+    for (int i = 0; i < 8; ++i)
+        cin >> v[i];
 
-        //1. mixed
-        if (i == 1)
-        {
-            first = input;
-            
-            if (input != 1 && input != 8)
-            {
-                cout << "mixed";
-                return 0;
-            }
-        }
+    vector<int> asc = {1,2,3,4,5,6,7,8};
+    vector<int> desc = {8,7,6,5,4,3,2,1};
 
-        //2.
-        ascendingSum += i;
-        descendingSum += 8 - (i - 1);
-        totalSum += input;
-
-        if (ascendingSum != totalSum && descendingSum != totalSum)
-        {
-            cout << "mixed";
-            return 0;
-        }
-    }
-    
-    if (first == 1)
-    {
+    if (v == asc)
         cout << "ascending";
-    }
-    else
-    {
+    else if (v == desc)
         cout << "descending";
-    }
-    
-    
+    else
+        cout << "mixed";
+
     return 0;
 }
