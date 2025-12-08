@@ -1,41 +1,30 @@
-#include <bits/stdc++.h>
+#include "bits/stdc++.h"
 using namespace std;
 
 int main()
 {
-    int input;
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
 
-    cin >> input;
+    int count = 0;
+    cin >> count;
 
-    for (int i = 0; i < input; i++)
+    for (int i = 0; i < count; ++i)
     {
-        int h, w, human;
-        cin >> h >> w >> human;
+        int h, w, p = 0;
+        cin >> h >> w >> p;
 
-        int hCount = 1;
-        int wCount = 1;
-        int count = 1;
+        int side = p / h;
+        int height = p % h;
 
-        while (count != human)
+        if (height == 0)
         {
-            hCount++;
-
-            if (hCount > h)
-            {
-                hCount = 1;
-                wCount++;
-            }
-
-            count++;
+            cout << h * 100 + side << '\n';
+            continue;
         }
 
-        string s = to_string(wCount);
-
-
-        cout << hCount << (wCount < 10 ? "0" + s : s) << "\n";
+        cout << height * 100 + side + 1 << '\n';
     }
-
-    cout << endl;
 
     return 0;
 }
