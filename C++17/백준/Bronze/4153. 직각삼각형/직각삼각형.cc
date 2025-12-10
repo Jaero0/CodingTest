@@ -1,29 +1,32 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int main()
-{
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
 
-    int a[3];
-
+    int arr[3];
+    
     while (true)
     {
-        cin >> *(a) >> *(a + 1) >> *(a + 2);
+        cin >> arr[0]; cin >> arr[1]; cin >> arr[2];
 
-        if (*a == 0 && *(a + 1) == 0 && *(a + 2) == 0)
+        if (arr[0] == 0 && arr[1] == 0 && arr[2] == 0)
         {
-            break;
+            return 0;
         }
-
-        sort(a, a + 3);
-
-        if (a[0] * a[0] + a[1] * a[1] == a[2] * a[2]) cout << "right" << "\n";
-        else cout << "wrong" << "\n";
+        
+        sort(begin(arr), end(arr));
+        if (arr[0] * arr[0] + arr[1] * arr[1] == arr[2] * arr[2])
+        {
+            cout << "right" << '\n';
+        }
+        else
+        {
+            cout << "wrong" << '\n';
+        }
+        
     }
-
-    cout << endl;
 
     return 0;
 }
