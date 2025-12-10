@@ -10,34 +10,12 @@ int main() {
     for (int i = 1; i <= sum; ++i)
     {
         int temp = i;
+        int copy = i;
 
-        if (i < 10)
+        while (copy != 0)
         {
-            temp += i;
-        }
-        else if (i < 100)
-        {
-            temp += i / 10 + i % 10;
-        }
-        else if (i < 1000)
-        {
-            temp += i / 100 + i % 100 / 10 + i % 10;
-        }
-        else if (i < 10000)
-        {
-            temp += i / 1000 + i % 1000 / 100 + i % 100 / 10 + i % 10;
-        }
-        else if (i < 100000)
-        {
-            temp += i / 10000 + i % 10000 / 1000 + i % 1000 / 100 + i % 100 / 10 + i % 10;
-        }
-        else if (i < 1000000)
-        {
-            temp += i / 100000 + i % 100000 / 10000 + i % 10000 / 1000 + i % 1000 / 100 + i % 100 / 10 + i % 10;
-        }
-        else // 100만
-        {
-            temp += 1;
+            temp += copy % 10;
+            copy /= 10;
         }
 
         if (temp == sum)
