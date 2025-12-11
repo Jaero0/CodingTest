@@ -1,22 +1,19 @@
 StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
         StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
 
-        int r = 31;
+        int length = int.Parse(Console.ReadLine());
+        string str = Console.ReadLine();
 
-        int L = int.Parse(sr.ReadLine());
-        string s = sr.ReadLine();
+        int r = 1;
+        int M = 1234567891;
 
-        long sum = 0;
-        long pow = 1;
-        for (int i = 0; i < L; i++)
+        int sum = 0;
+        for (int i = 0; i < length; i++)
         {
-            int cur = s[i] - 'a' + 1;
+            int n = str[i] - 'a' + 1;
 
-            sum += cur * pow;
-            pow = (pow * r) % 1234567891;
+            sum += ((n % M) * (r % M));
+            r = (r * 31) % M;
         }
-        
-        sw.WriteLine(sum % 1234567891);
-        
-        sr.Close();
-        sw.Close();
+
+        Console.WriteLine(sum);
