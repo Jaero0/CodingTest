@@ -1,41 +1,53 @@
-using System;
-using System.IO;
+using System.Text;
 
-namespace Programmers;
+namespace Testt;
 
-public class MainClass
-{
-    static void Main(string[] args)
+public class Solution {
+    public static void Main(string[] args)
     {
-        string[] inputs = Console.ReadLine().Split(' ');
-        int f = int.Parse(inputs[0]);
-        int s = int.Parse(inputs[1]);
+        StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
+        StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
 
-        bool[] arr = new bool[s + 1];
-        arr[0] = true;
-        arr[1] = true;
+        int[] MN = Array.ConvertAll(Console.ReadLine().Split(' '), int.Parse);
 
-        int sqrt = (int)Math.Sqrt(s);
-
-        for (int i = 2; i <= sqrt; i++)
+        /*bool[] sosu = new bool[1000001];
+        sosu[0] = true;
+        sosu[1] = true;
+        for (int i = 2; i * i < 1000000; i++)
         {
-            if (arr[i] == false) {
-                for (int j = i * i; j <= s; j+=i)
-                {
-                    arr[j] = true;
-                }
-            }
-        }
-        
-        StreamWriter sw = new(new BufferedStream(Console.OpenStandardOutput()));
-        for (int i = f; i <= s; i++)
-        {
-            if (arr[i] == false)
+            for (int j = i; j < 1000000; j *= 2)
             {
-                sw.WriteLine(i);
+                
             }
+        }*/
+
+        StringBuilder sb = new StringBuilder();
+        
+        for (int i = MN[0]; i <= MN[1]; i++)
+        {
+            if (i == 1)
+            {
+                continue;
+            }
+
+            bool isDivided = false;
+            int sqrt = (int)Math.Sqrt(i);
+            for (int j = 2; j <= sqrt; j++)
+            {
+                if (i % j != 0) continue;
+                isDivided = true;
+                break;
+            }
+
+            if (isDivided)
+            {
+                continue;
+            }
+
+            sb.Append(i);
+            sb.Append('\n');
         }
 
-        sw.Close();
+        Console.WriteLine(sb.ToString());
     }
 }
