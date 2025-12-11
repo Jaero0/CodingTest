@@ -8,7 +8,7 @@ public class Solution {
         StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
         StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
 
-        int[] MN = Array.ConvertAll(Console.ReadLine().Split(' '), int.Parse);
+        int[] MN = Array.ConvertAll(sr.ReadLine().Split(' '), int.Parse);
 
         bool[] sosu = new bool[MN[1] + 1];
         sosu[0] = true;
@@ -32,11 +32,11 @@ public class Solution {
         {
             if (sosu[i] == false)
             {
-                sb.Append(i);
-                sb.Append('\n');
+                sw.WriteLine(i);
             }
         }
-
-        Console.WriteLine(sb.ToString());
+        
+        sw.Close();
+        sr.Close();
     }
 }
