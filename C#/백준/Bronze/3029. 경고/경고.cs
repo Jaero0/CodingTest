@@ -9,14 +9,6 @@ public class Solution {
         int[] first = Array.ConvertAll(sr.ReadLine().Split(':'), int.Parse);
         int[] second = Array.ConvertAll(sr.ReadLine().Split(':'), int.Parse);
 
-        if (first[0] == second[0] && first[1] == second[1] && first[2] == second[2])
-        {
-            sw.WriteLine("24:00:00");
-            sw.Close();
-            sr.Close();
-            return;
-        }
-
         int sec, min, hr = 0;
         if (second[2] < first[2]) //sec
         {
@@ -39,10 +31,17 @@ public class Solution {
         }
 
         hr = second[0] - first[0] < 0 ? second[0] - first[0] + 24 : second[0] - first[0];
-        
-        sw.Write(hr < 10 ? $"0{hr}:" : $"{hr}:");
-        sw.Write(min < 10 ? $"0{min}:" : $"{min}:");
-        sw.Write(sec < 10 ? $"0{sec}" : $"{sec}");
+
+        if (sec == 0 && min == 0 && hr == 0)
+        {
+            sw.WriteLine("24:00:00");
+        }
+        else
+        {
+            sw.Write(hr < 10 ? $"0{hr}:" : $"{hr}:");
+            sw.Write(min < 10 ? $"0{min}:" : $"{min}:");
+            sw.Write(sec < 10 ? $"0{sec}" : $"{sec}");
+        }
         
         sw.Close();
         sr.Close();
