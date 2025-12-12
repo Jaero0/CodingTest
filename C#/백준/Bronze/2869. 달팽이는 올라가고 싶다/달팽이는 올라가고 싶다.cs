@@ -1,16 +1,24 @@
-string[] inputs = Console.ReadLine().Split(' ');
+namespace Testt;
 
-        int climb = int.Parse(inputs[0]);
-        int fall = int.Parse(inputs[1]);
-        int max = int.Parse(inputs[2]);
+public class Solution {
+    public static void Main(string[] args)
+    {
+        StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
+        StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
 
-        var b = (max - fall) % (climb - fall) == 0;
-        var c = (max - fall) / (climb - fall);
-        Console.WriteLine(b ? c : c + 1 );
+        //3 2 5 -> 3, 1, 4, 2, 5
+        //3 1 5 -> 3, 2, 5
+        //5 2 11-> 5, 3, 8, 6, 11
+        //5 2 12-> 5, 3, 8, 6, 11, 9, 14
 
-        //n = days
-        //-fall * (n - 1) + climb  * n >= max 
-        //-fall * n + fall + climb * n >= max
-        //-fall * n + climb * n >= max - fall
-        //(climb-fall) * n >= max - fall
-        //n = (max - fall) / (climb - fall)
+        int[] abc = Array.ConvertAll(sr.ReadLine().Split(' '), int.Parse);
+
+        int minArrive = abc[2] - abc[0];
+        int i = minArrive % (abc[0] - abc[1]) == 0 ? minArrive / (abc[0] - abc[1]) : minArrive / (abc[0] - abc[1]) + 1;
+        
+        sw.WriteLine(i+1);
+        
+        sw.Close();
+        sr.Close();
+    }
+}
