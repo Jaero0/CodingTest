@@ -1,32 +1,35 @@
-StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
+namespace Testt;
+
+public class Solution {
+    
+    public static void Main(string[] args)
+    {
+        StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
         StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
 
-        
         while (true)
         {
-            //012345 -> 012 345
-            //0123456 -> 012 3 456
-            string input = sr.ReadLine();
+            string s = sr.ReadLine();
 
-            if (input.Equals("0"))
-            {
-                break;
-            }
-            
-            var l = input.Length;
+            if (s.Equals("0")) break;
 
-            bool isDif = false;
-            for (int i = 0; i < l / 2; i++)
+            bool isSame = true;
+            for (int i = 0; i < s.Length / 2; i++)
             {
-                if (input[i] != input[l -1 - i])
+                char f = s[i];
+                char se = s[s.Length - i - 1];
+
+                if (f != se)
                 {
-                    isDif = true;
+                    isSame = false;
                     break;
                 }
             }
-
-            sw.WriteLine(isDif ? "no" : "yes");
+            
+            sw.WriteLine(isSame ? "yes" : "no");
         }
-
-        sr.Close();
+        
         sw.Close();
+        sr.Close();
+    }
+}
