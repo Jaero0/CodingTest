@@ -1,23 +1,37 @@
-StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
-        StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
-        
-        int n = int.Parse(sr.ReadLine());
-        int[] count = new int[10002];
+namespace Testt;
 
-        for (int i = 0; i < n; i++)
+public class Solution {
+    
+    public static void Main(string[] args)
+    {
+        StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
+        StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
+
+        SortedDictionary<short, int> d = new SortedDictionary<short, int>();
+        int l = int.Parse(sr.ReadLine());
+
+        for (int i = 0; i < l; i++)
         {
-            int num = int.Parse(sr.ReadLine());
-            count[num]++;
+            short t = short.Parse(sr.ReadLine());
+
+            if (!d.ContainsKey(t))
+            {
+                d.Add(t, 1);
+                continue;
+            }
+
+            d[t]++;
         }
 
-        for (int i = 0; i < 10002; i++)
+        foreach (var kvp in d)
         {
-            while (count[i] > 0)
+            for (int i = 0; i < kvp.Value; i++)
             {
-                sw.WriteLine(i);
-                count[i]--;
+                sw.WriteLine(kvp.Key);
             }
         }
-
-        sr.Close();
+        
         sw.Close();
+        sr.Close();
+    }
+}
