@@ -1,25 +1,44 @@
-int count = int.Parse(Console.ReadLine());
+namespace Testt;
 
-        int[,] floorRoom = new int[15, 15];
+public class Solution {
+    
+    public static void Main(string[] args)
+    {
+        StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
+        StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
 
+        int[,] apt = new int[15,15];
         for (int i = 0; i < 15; i++)
         {
-            floorRoom[i, 1] = 1;
-            floorRoom[0, i] = i;
-        }
-        
-        for (int i = 1; i < 15; i++)
-        {
-            for (int j = 2; j < 15; j++)
+            for (int j = 1; j < 15; j++)
             {
-                floorRoom[i,j] = floorRoom[i, j - 1] + floorRoom[i - 1, j];
+                if (i == 0)
+                {
+                    apt[i, j] = j;
+                    continue;
+                }
+
+                if (j == 1)
+                {
+                    apt[i, j] = 1;
+                    continue;
+                }
+
+                apt[i, j] = apt[i - 1, j] + apt[i, j - 1];
             }
         }
         
-        for (int i = 0; i < count; i++)
-        {
-            int floor = int.Parse(Console.ReadLine());
-            int room = int.Parse(Console.ReadLine());
+        int T = int.Parse(sr.ReadLine());
 
-            Console.WriteLine(floorRoom[floor,room]);
+        for (int i = 0; i < T; i++)
+        {
+            int f = int.Parse(sr.ReadLine());
+            int n = int.Parse(sr.ReadLine());
+            
+            sw.WriteLine(apt[f,n]);
         }
+        
+        sw.Close();
+        sr.Close();
+    }
+}
