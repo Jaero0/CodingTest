@@ -7,27 +7,26 @@ public class Solution {
         StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
         StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
 
-        SortedDictionary<short, int> d = new SortedDictionary<short, int>();
+        int[] arr = new int[10001];
         int l = int.Parse(sr.ReadLine());
 
         for (int i = 0; i < l; i++)
         {
-            short t = short.Parse(sr.ReadLine());
+            int t = int.Parse(sr.ReadLine());
 
-            if (!d.ContainsKey(t))
+            arr[t]++;
+        }
+
+        for (int i = 0; i < 10001; i++)
+        {
+            if (arr[i] == 0)
             {
-                d.Add(t, 1);
                 continue;
             }
 
-            d[t]++;
-        }
-
-        foreach (var kvp in d)
-        {
-            for (int i = 0; i < kvp.Value; i++)
+            for (int j = 0; j < arr[i]; j++)
             {
-                sw.WriteLine(kvp.Key);
+                sw.WriteLine(i);
             }
         }
         
