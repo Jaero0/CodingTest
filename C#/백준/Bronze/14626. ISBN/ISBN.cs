@@ -1,7 +1,7 @@
 namespace Testt;
 
-public class Solution {
-    
+public class Solution
+{
     public static void Main(string[] args)
     {
         StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
@@ -21,25 +21,18 @@ public class Solution {
                 continue;
             }
 
-            sum = ((isbn[i] - '0') * mul + sum) % 10;
+            sum += (isbn[i] - '0') * mul;
         }
-        
-        if (asteriskMul == 1)
+
+        for (int i = 0; i < 10; i++)
         {
-            sw.WriteLine((10 - sum) % 10);
-        }
-        else
-        {
-            for (int i = 0; i < 10; i++)
+            if ((sum + asteriskMul * i) % 10 == 0)
             {
-                if ((sum + 3 * i) % 10 == 0)
-                {
-                    sw.WriteLine(i);
-                    break;
-                }
+                sw.WriteLine(i);
+                break;
             }
         }
-        
+
         sw.Close();
         sr.Close();
     }
