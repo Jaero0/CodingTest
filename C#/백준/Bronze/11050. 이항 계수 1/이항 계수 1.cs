@@ -1,30 +1,26 @@
+namespace Testt;
+
 public class Solution {
+    
     public static void Main(string[] args)
     {
-        int[] input = Array.ConvertAll(Console.ReadLine().Split(' '), int.Parse);
+        StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
+        StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
 
-        
-        int fFac = Factorial(input[0]);
-        int sFac = Factorial(input[1]);
-        int fac = Factorial((input[0] - input[1]));
+        int[] fact = new int[11];
+        fact[0] = 1;
+        fact[1] = 1;
 
-        Console.WriteLine(fFac / (fac * sFac));
-    }
-    
-    public static int Factorial(int i)
-    {
-        int fac = 1;
-        
-        if (i == 1)
+        for (int i = 2; i < 11; i++)
         {
-            return fac;
-        }
-        
-        for (int j = 2; j <= i; j++)
-        {
-            fac *= j;
+            fact[i] = fact[i - 1] * i;
         }
 
-        return fac;
+        int[] NK = Array.ConvertAll(Console.ReadLine().Split(' '), int.Parse);
+
+        Console.WriteLine(fact[NK[0]] / (fact[NK[1]] * fact[NK[0] - NK[1]]));
+        
+        sw.Close();
+        sr.Close();
     }
 }
