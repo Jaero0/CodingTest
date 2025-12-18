@@ -1,46 +1,43 @@
-static string ReturnFizzBuzz(int t)
-        {
-            if (t % 3 == 0 && t % 5 == 0)
-            {
-                return "FizzBuzz";
-            }
+namespace Testt;
 
-            if (t % 3 == 0 && t % 5 != 0)
-            {
-                return "Fizz";
-            }
-
-            if (t % 3 != 0 && t % 5 == 0)
-            {
-                return "Buzz";
-            }
-            
-            return t.ToString();
-        }
-        
+public class Solution
+{
+    public static void Main(string[] args)
+    {
         StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
         StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
 
-        string f = sr.ReadLine();
-        string s = sr.ReadLine();
-        string t = sr.ReadLine();
+        int ind = 0;
+        int res = 0;
+        for (int i = 0; i < 3; i++)
+        {
+            if (int.TryParse(sr.ReadLine(), out var result))
+            {
+                ind = i;
+                res = result;
+            }
+        }
 
-        if (int.TryParse(t, out int tResult))
+        res += ind == 0 ? 3 : ind == 1 ? 2 : 1;
+
+        if (res % 15 == 0)
         {
-            sw.WriteLine(ReturnFizzBuzz(tResult + 1));
+            Console.WriteLine("FizzBuzz");
         }
-        else if (int.TryParse(s, out int sResult))
+        else if (res % 5 == 0)
         {
-            sw.WriteLine(ReturnFizzBuzz(sResult + 2));
+            Console.WriteLine("Buzz");
         }
-        else if (int.TryParse(f, out int fResult))
+        else if (res % 3 == 0)
         {
-            sw.WriteLine(ReturnFizzBuzz(fResult + 3));
+            Console.WriteLine("Fizz");
         }
         else
         {
-            sw.WriteLine("FizzBuzz");
+            Console.WriteLine(res);
         }
-        
-        sr.Close();
+
         sw.Close();
+        sr.Close();
+    }
+}
