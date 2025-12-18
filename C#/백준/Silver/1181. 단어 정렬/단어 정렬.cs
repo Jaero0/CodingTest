@@ -1,35 +1,42 @@
-StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
-        StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
+using System.Collections;
 
-        int gugu = int.Parse(sr.ReadLine());
-        var list = new List<string>();
+namespace Testt;
 
-        for (int i = 0; i < gugu; i++)
+public class Solution
+{
+    class Comp : IComparer<string>
+    {
+        public int Compare(string s, string s1) 
         {
-            var readLine = sr.ReadLine();
-            
-            list.Add(readLine);
+            if (s.Length != s1.Length)
+            {
+                return s.Length - s1.Length;
+            }
+
+            return string.Compare(s, s1);
+        }
+    }
+    
+    public static void Main(string[] args)
+    {
+        StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
+        StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
+
+        int l = int.Parse(sr.ReadLine());
+
+        SortedSet<string> arr = new SortedSet<string>(new Comp());
+
+        for (int i = 0; i < l; i++)
+        {
+            arr.Add(sr.ReadLine());
         }
         
-        list.Sort((a, b) =>
+        foreach (var s in arr)
         {
-            if (a.Length == b.Length)
-            {
-                return a.CompareTo(b);
-            }
-            
-            return a.Length - b.Length;
-        } );
-
-        for (int i = 0; i < gugu; i++)
-        {
-            if (i != 0 && list[i] == list[i - 1])
-            {
-                continue;
-            }
-            
-            sw.WriteLine(list[i]);
+            sw.WriteLine(s);
         }
 
-        sr.Close();
         sw.Close();
+        sr.Close();
+    }
+}
