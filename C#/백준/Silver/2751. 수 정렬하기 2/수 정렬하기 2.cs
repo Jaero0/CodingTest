@@ -1,17 +1,30 @@
-StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
+using System.Collections;
+
+namespace Testt;
+
+public class Solution
+{
+    public static void Main(string[] args)
+    {
         StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
+        StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
 
-        int gugu = int.Parse(sr.ReadLine());
-        var list = new int[gugu];
+        int N = int.Parse(sr.ReadLine());
 
-        for (int i = 0; i < gugu; i++)
+        int[] arr = new int[N];
+
+        for (int i = 0; i < N; i++)
         {
-            list[i] = int.Parse(sr.ReadLine());
+            int t = int.Parse(sr.ReadLine());
+
+            arr[i] = t;
         }
         
-        Array.Sort(list);
-
-        Array.ForEach(list, i => sw.WriteLine(i));
+        Array.Sort(arr);
         
-        sr.Close();
+        Array.ForEach(arr, sw.WriteLine);
+        
         sw.Close();
+        sr.Close();
+    }
+}
