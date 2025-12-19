@@ -30,12 +30,14 @@ public class Solution
 
         int N = int.Parse(sr.ReadLine());
 
-        int ans = 0;
-
-        while (N > 4)
+        int ans = N / 5;
+        if (N >= 125)
         {
-            N /= 5;
-            ans += N;
+            ans +=  N / 125;
+        }
+        if (N >= 25)
+        {
+            ans += N / 25;
         }
         
         sw.WriteLine(ans);
