@@ -29,18 +29,8 @@ public class Solution
          */
 
         int N = int.Parse(sr.ReadLine());
-
-        int ans = N / 5;
-        if (N >= 125)
-        {
-            ans +=  N / 125;
-        }
-        if (N >= 25)
-        {
-            ans += N / 25;
-        }
         
-        sw.WriteLine(ans);
+        sw.WriteLine(N / 5 + N / 25 + N / 125);
         
         sw.Close();
         sr.Close();
