@@ -1,34 +1,45 @@
-StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
+public class Solution
+{
+    class YN
+    {
+        public int year;
+        public string name;
+
+        public YN(int year, string name)
+        {
+            this.year = year;
+            this.name = name;
+        }
+    }
+    public static void Main(string[] args)
+    {
+        StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
         StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
 
-        int count = int.Parse(sr.ReadLine());
+        int input = int.Parse(sr.ReadLine());
+        var list = new List<KeyValuePair<int, YN>>();
 
-        var ageName = new Dictionary<int, List<string>>();
+        for (int i = 0; i < input; i++)
+        {
+            var strs = sr.ReadLine().Split(' ');
+            list.Add(KeyValuePair.Create(i, new YN(int.Parse(strs[0]), strs[1])));
+        }
         
-        for (int i = 0; i < count; i++)
+        list.Sort((l1, l2) =>
         {
-            string[] input = sr.ReadLine().Split(' ');
+            int dif = l1.Value.year - l2.Value.year;
 
-            int key = int.Parse(input[0]);
-            
-            if (ageName.TryGetValue(key, out var list))
+            if (dif == 0)
             {
-                ageName[key].Add(input[1]);
-                continue;
+                return l1.Key - l2.Key;
             }
-            
-            ageName.Add(key, new List<string>(){input[1]});
-        }
 
-        IOrderedEnumerable<KeyValuePair<int, List<string>>> keyValuePairs = ageName.OrderBy(x => x.Key);
-
-        foreach (var kvp in keyValuePairs)
-        {
-            int key = kvp.Key;
-            var val = kvp.Value;
-            
-            foreach (var t in val) { sw.WriteLine($"{key} {t}"); }
-        }
-
-        sr.Close();
+            return dif;
+        });
+        
+        list.ForEach(l => sw.WriteLine(l.Value.year + " " + l.Value.name));
+        
         sw.Close();
+        sr.Close();
+    }
+}
