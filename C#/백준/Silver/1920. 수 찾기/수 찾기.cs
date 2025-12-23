@@ -10,17 +10,17 @@ public class Solution
         sr.ReadLine();
 
         var arr = Array.ConvertAll(sr.ReadLine().Split(' '), int.Parse);
-        var dict = new Dictionary<int, bool>();
+        var set = new HashSet<int>();
 
         foreach (var i in arr)
         {
-            if (dict.TryAdd(i, true)) { }
+            set.Add(i);
         }
 
         sr.ReadLine();
         
         arr = Array.ConvertAll(sr.ReadLine().Split(' '), int.Parse);
-        foreach (var i in arr) { sw.WriteLine(dict.TryGetValue(i, out bool b) ? 1 : 0); }
+        foreach (var i in arr) { sw.WriteLine(set.Contains(i) ? 1 : 0); }
 
 
         sw.Close();
