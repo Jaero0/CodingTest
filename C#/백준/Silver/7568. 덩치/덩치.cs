@@ -1,43 +1,53 @@
-StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
+public class Solution
+{
+    class YN
+    {
+        public int height;
+        public int weight;
+
+        public YN(int height, int weight)
+        {
+            this.height = height;
+            this.weight = weight;
+        }
+    }
+    public static void Main(string[] args)
+    {
+        StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
         StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
 
-        int input = int.Parse(sr.ReadLine());
+        int n = int.Parse(sr.ReadLine());
 
-        var heightWeight = new List<int[]>();
+        List<YN> list = new List<YN>();
 
-        for (int i = 0; i < input; i++)
+        for (int i = 0; i < n; i++)
         {
-            int[] ints = Array.ConvertAll(sr.ReadLine().Split(' '), int.Parse);
-            
-            heightWeight.Add(new []{ints[1], ints[0]});
+            int[] arr = Array.ConvertAll(sr.ReadLine().Split(' '), int.Parse);
+            list.Add(new YN(arr[1], arr[0]));
         }
 
-
-        var arr = new int[input];
-        
-        for (int i = 0; i < input; i++)
+        for (int i = 0; i < n; i++)
         {
-            int h = heightWeight[i][0];
-            int w = heightWeight[i][1];
-
-            var biggerCount = 0;
+            int count = 1;
+            YN originKey = list[i];
             
-            for (int j = 0; j < input; j++)
+            for (int j = 0; j < n; j++)
             {
-                if (i == j)
+                if (j == i)
                 {
                     continue;
-                };
-                
-                int compareH = heightWeight[j][0];
-                int compareW = heightWeight[j][1];
+                }
 
-                if (compareW > w && compareH > h) { biggerCount++; }
-
+                if (list[j].height > originKey.height && list[j].weight > originKey.weight)
+                {
+                    count++;
+                }
             }
 
-            sw.Write(biggerCount + 1 + " ");
+            sw.Write(count + " ");
         }
         
         sw.Close();
         sr.Close();
+    }
+}
