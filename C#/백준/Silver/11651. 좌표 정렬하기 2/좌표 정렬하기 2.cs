@@ -1,28 +1,46 @@
-StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
+public class Solution
+{
+    class XY
+    {
+        public int X;
+        public int Y;
+
+        public XY(int X, int Y)
+        {
+            this.X = X;
+            this.Y = Y;
+        }
+    }
+    public static void Main(string[] args)
+    {
+        StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
         StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
 
-        int count = int.Parse(sr.ReadLine());
+        int n = int.Parse(sr.ReadLine());
 
-        var xyList = new List<int[]>();
-        
-        for (int i = 0; i < count; i++)
+        var list = new List<XY>();
+
+        for (int i = 0; i < n; i++)
         {
-            string[] sa = sr.ReadLine().Split(' ');
-            int[] ia = new[] { int.Parse(sa[0]), int.Parse(sa[1]) };
-            
-            xyList.Add(ia);
+            int[] arr = Array.ConvertAll(sr.ReadLine().Split(' '), int.Parse);
+            list.Add(new XY(arr[0], arr[1]));
         }
         
-        xyList.Sort((f, s) =>
+        list.Sort((xy1, xy2) =>
         {
-            if (s[1] == f[1])
+            int cmpY = xy1.Y - xy2.Y;
+
+            if (cmpY == 0)
             {
-                return f[0] - s[0];
+                return xy1.X - xy2.X;
             }
-            return f[1] - s[1];
+
+            return cmpY;
         });
         
-        xyList.ForEach(a => sw.WriteLine($"{a[0]} {a[1]}"));
+        list.ForEach(xy => sw.WriteLine(xy.X + " " + xy.Y));
         
-        sr.Close();
         sw.Close();
+        sr.Close();
+    }
+}
