@@ -1,40 +1,29 @@
-StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
+using System.Linq;
+
+public class Solution
+{
+    public static void Main(string[] args)
+    {
+        StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
         StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
 
         sr.ReadLine();
 
-        string[] A = sr.ReadLine().Split(' ');
+        var arr = Array.ConvertAll(sr.ReadLine().Split(' '), int.Parse);
+        var dict = new Dictionary<int, bool>();
+
+        foreach (var i in arr)
+        {
+            if (dict.TryAdd(i, true)) { }
+        }
 
         sr.ReadLine();
         
-        string[] M = sr.ReadLine().Split(' ');
+        arr = Array.ConvertAll(sr.ReadLine().Split(' '), int.Parse);
+        foreach (var i in arr) { sw.WriteLine(dict.TryGetValue(i, out bool b) ? 1 : 0); }
 
-        var dict = new Dictionary<string, bool>();
 
-        foreach (string s in A)
-        {
-            if (dict.TryGetValue(s, out var b))
-            {
-                dict[s] = true;
-            }
-            else
-            {
-                dict.Add(s, true);
-            }
-        }
-
-        foreach (var s in M)
-        {
-            if (dict.TryGetValue(s, out var b))
-            {
-                sw.WriteLine(1);
-            }
-            else
-            {
-                sw.WriteLine(0);
-            }
-        }
-        
-        
-        sr.Close();
         sw.Close();
+        sr.Close();
+    }
+}
