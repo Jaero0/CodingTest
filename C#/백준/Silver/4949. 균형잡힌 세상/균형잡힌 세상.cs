@@ -1,43 +1,69 @@
-using System;
-using System.IO;
-using System.Collections.Generic;
+using System.Linq;
 
 public class Solution
 {
     public static void Main(string[] args)
     {
-        using var sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
-        using var sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
+        StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
+        StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
 
         while (true)
         {
             string parse = sr.ReadLine();
-            if (parse == ".")
+
+            if (parse.Equals("."))
+            {
                 break;
+            }
 
-            Stack<char> stack = new Stack<char>();
-            bool invalid = false;
+            Stack<char> s = new Stack<char>();
+            bool isNot = false;
 
-            foreach (char c in parse)
+            foreach (var c in parse)
             {
                 if (c == '(' || c == '[')
                 {
-                    stack.Push(c);
+                    s.Push(c);
                 }
                 else if (c == ')' || c == ']')
                 {
-                    if (stack.Count != 0 && IsMatching(stack.Pop(), c)) continue;
-                    invalid = true;
-                    break;
+                    if (s.Count == 0)
+                    {
+                        isNot = true;
+                        break;
+                    }
+                    
+                    if (c == ')')
+                    {
+                        if (s.Peek() == '(')
+                        {
+                            s.Pop();
+                        }
+                        else
+                        {
+                            isNot = true;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        if (s.Peek() == '[')
+                        {
+                            s.Pop();
+                        }
+                        else
+                        {
+                            isNot = true;
+                            break;
+                        }
+                    }
                 }
             }
-
-            sw.WriteLine(!invalid && stack.Count == 0 ? "yes" : "no");
+            
+            sw.WriteLine(s.Count == 0 && isNot == false ? "yes" : "no");
         }
-    }
 
-    static bool IsMatching(char open, char close)
-    {
-        return (open == '(' && close == ')') || (open == '[' && close == ']');
+        sw.Close();
+        sr.Close();
     }
 }
