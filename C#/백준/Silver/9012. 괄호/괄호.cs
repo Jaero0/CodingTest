@@ -1,42 +1,40 @@
-StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
-        StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
+using System;
+using System.IO;
+using System.Collections.Generic;
 
-        int c = int.Parse(sr.ReadLine());
-        
-        for (int i = 0; i < c; i++)
+public class Solution
+{
+    public static void Main(string[] args)
+    {
+        using var sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
+        using var sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
+
+        int N = int.Parse(sr.ReadLine());
+
+        for (int i = 0; i < N; i++)
         {
             string s = sr.ReadLine();
+
+            int count = 0;
+            bool invalid = false;
+
+            foreach (char c in s)
+            {
+                if (c == '(')
+                {
+                    count++;
+                }
+                else if (c == ')')
+                {
+                    count--;
+                    if (count < 0)
+                    {
+                        invalid = true;
+                    }
+                }
+            }
             
-            int openCount = 0;
-            bool isClosed = false;
-
-            foreach (var ch in s)
-            {
-                if (ch == '(')
-                {
-                    openCount++;
-                }
-                else
-                {
-                    openCount--;
-                    
-                }
-
-                if (openCount < 0)
-                {
-                    sw.WriteLine("NO");
-                    isClosed = true;
-                    break;
-                }
-            }
-
-            if (isClosed)
-            {
-                continue;
-            }
-
-            sw.WriteLine(openCount == 0 ? "YES" : "NO");
+            sw.WriteLine(invalid == false && count == 0 ? "YES" : "NO");
         }
-        
-        sr.Close();
-        sw.Close();
+    }
+}
