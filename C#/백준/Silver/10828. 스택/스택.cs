@@ -1,41 +1,38 @@
-Stack<int> stack = new Stack<int>();
-
-        int c = int.Parse(Console.ReadLine());
-
+public class Solution
+{
+    public static void Main(string[] args)
+    {
+        StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
         StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
-        
-        for (int i = 0; i < c; i++)
+
+        int N = int.Parse(sr.ReadLine());
+        var s = new Stack<int>();
+
+        for (int i = 0; i < N; i++)
         {
-            string[] splitted = Console.ReadLine().Split(' ');
-            switch (splitted[0])
+            string[] t = sr.ReadLine().Split(' ');
+
+            switch (t[0])
             {
                 case "push":
-                    int sp = int.Parse(splitted[1]);
-                    stack.Push(sp);
+                    s.Push(int.Parse(t[1]));
                     break;
                 case "pop":
-                    if (stack.Count == 0)
-                    {
-                        sw.WriteLine(-1);
-                        continue;
-                    }
-                    sw.WriteLine(stack.Pop());
+                    sw.WriteLine(s.TryPop(out var r) ? r : -1);
                     break;
                 case "size":
-                    sw.WriteLine(stack.Count);
+                    sw.WriteLine(s.Count);
                     break;
                 case "empty":
-                    sw.WriteLine(stack.Count > 0 ? 0 : 1);
+                    sw.WriteLine(s.Count > 0 ? 0 : 1);
                     break;
                 case "top":
-                    if (stack.TryPeek(out int a))
-                    {
-                        sw.WriteLine(a);
-                        continue;
-                    }
-                    sw.WriteLine(-1);
+                    sw.WriteLine(s.TryPeek(out var rr) ? rr : -1);
                     break;
             }
         }
         
+        sr.Close();
         sw.Close();
+    }
+}
