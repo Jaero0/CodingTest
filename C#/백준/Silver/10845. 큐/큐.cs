@@ -1,36 +1,53 @@
-StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
+public class Solution
+{
+    public class FBQ
+    {
+        
+    }
+    
+    public static void Main(string[] args)
+    {
+        StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
         StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
 
-        int c = int.Parse(sr.ReadLine());
-        var q = new Queue<int>();
+        int N = int.Parse(sr.ReadLine());
+        var s = new Queue<int>();
+        int rear = -1;
 
-        for (int i = 0; i < c; i++)
+        for (int i = 0; i < N; i++)
         {
-            string[] ss = sr.ReadLine().Split(' ');
+            string[] t = sr.ReadLine().Split(' ');
 
-            switch (ss[0])
+            switch (t[0])
             {
-                case "push": 
-                    q.Enqueue(int.Parse(ss[1]));
+                case "push":
+                    var ad = int.Parse(t[1]);
+                    s.Enqueue(ad);
+                    rear = ad;
                     break;
                 case "pop":
-                    sw.WriteLine(q.Count == 0 ? -1 : q.Dequeue());
+                    sw.WriteLine(s.TryDequeue(out var r) ? r : -1);
+                    if (s.Count == 0)
+                    {
+                        rear = -1;
+                    }
                     break;
                 case "size":
-                    sw.WriteLine(q.Count);
+                    sw.WriteLine(s.Count);
                     break;
                 case "empty":
-                    sw.WriteLine(q.Count == 0 ? 1 : 0);
+                    sw.WriteLine(s.Count > 0 ? 0 : 1);
                     break;
                 case "front":
-                    sw.WriteLine(q.Count == 0 ? -1 : q.Peek());
+                    sw.WriteLine(s.TryPeek(out var rr) ? rr : -1);
                     break;
                 case "back":
-                    sw.WriteLine(q.Count == 0 ? -1 : q.ToArray()[q.Count - 1]);
+                    sw.WriteLine(rear);
                     break;
             }
         }
         
-        
         sr.Close();
         sw.Close();
+    }
+}
