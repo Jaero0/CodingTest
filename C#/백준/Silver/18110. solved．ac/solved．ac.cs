@@ -1,8 +1,4 @@
-public class Solution
-{
-    public static void Main(string[] args)
-    {
-        using StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
+using StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
         using StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
 
         int N = int.Parse(sr.ReadLine());
@@ -13,7 +9,7 @@ public class Solution
             return;
         }
 
-        int no = (int)Math.Round((double)N / 100 * 15, MidpointRounding.AwayFromZero);
+        int no = (int)Math.Round(N * 0.15, MidpointRounding.AwayFromZero);
 
         int[] arr = new int[N];
         for (int i = 0; i < N; i++)
@@ -30,5 +26,3 @@ public class Solution
         }
         
         sw.WriteLine(Math.Round((double)sum / (N - no * 2), MidpointRounding.AwayFromZero));
-    }
-}
