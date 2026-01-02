@@ -1,34 +1,34 @@
-StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
-        StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
+public class Solution
+{
+    public static void Main(string[] args)
+    {
+        using StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
+        using StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
 
-        int count = int.Parse(sr.ReadLine());
+        int N = int.Parse(sr.ReadLine());
 
-        if (count == 0)
+        if (N == 0)
         {
             sw.WriteLine(0);
-            sr.Close();
-            sw.Close();
             return;
         }
-        
-        var list = new List<int>();
 
-        for (int i = 0; i < count; i++)
+        int no = (int)Math.Round((double)N / 100 * 15, MidpointRounding.AwayFromZero);
+
+        int[] arr = new int[N];
+        for (int i = 0; i < N; i++)
         {
-            list.Add(int.Parse(sr.ReadLine()));
+            arr[i] = int.Parse(sr.ReadLine());
         }
-        
-        list.Sort();
 
-        int rounded = (int)Math.Round(count * 0.15, MidpointRounding.AwayFromZero);
+        Array.Sort(arr);
 
         int sum = 0;
-        for (int i = rounded; i < count - rounded; i++)
+        for (int i = no; i < N - no; i++)
         {
-            sum += list[i];
+            sum += arr[i];
         }
         
-        sw.WriteLine(Math.Round((double)sum / (count - rounded * 2), MidpointRounding.AwayFromZero));
-        
-        sr.Close();
-        sw.Close();
+        sw.WriteLine(Math.Round((double)sum / (N - no * 2), MidpointRounding.AwayFromZero));
+    }
+}
