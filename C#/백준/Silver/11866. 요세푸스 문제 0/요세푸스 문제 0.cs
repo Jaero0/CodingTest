@@ -1,48 +1,38 @@
-StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
+public class Solution
+{
+    public static void Main(string[] args)
+    {
+        StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
         StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
 
-        var list = new List<int>();
+        int[] N = Array.ConvertAll(sr.ReadLine().Split(' '), int.Parse);
 
-        int[] c = Array.ConvertAll(sr.ReadLine().Split(' '), int.Parse);
+        var q = new Queue<int>(N[0]);
 
-        for (int i = 1; i <= c[0]; i++)
+        for (int i = 0; i < N[0]; i++)
         {
-            list.Add(i);
+            q.Enqueue(i + 1);
         }
         
         sw.Write("<");
 
-        int node = -1;
-
-        while (true)
+        while (q.Count > 1)
         {
-            if (list.Count == 1)
+            for (int i = 0; i < N[1]; i++)
             {
-                break;
-            }
-            
-            for (int i = 0; i < c[1]; i++)
-            {
-                node++;
-                
-                if (node >= list.Count)
+                if (i == N[1] - 1)
                 {
-                    node -= list.Count;
+                    sw.Write(q.Dequeue() + ", ");
+                    break;
                 }
+                
+                q.Enqueue(q.Dequeue());
             }
-            
-            
-
-            sw.Write(list[node] + ", ");
-
-            list.RemoveAt(node);
-            
-            node--;
         }
         
-        sw.Write(list[0]);
-        
-        sw.WriteLine(">");
+        sw.Write(q.Dequeue() + ">");
         
         sr.Close();
         sw.Close();
+    }
+}
