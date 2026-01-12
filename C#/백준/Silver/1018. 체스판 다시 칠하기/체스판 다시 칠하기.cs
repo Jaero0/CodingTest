@@ -1,94 +1,66 @@
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-
-public class Solution {
+public class Solution
+{
     public static void Main(string[] args)
     {
-        StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
-        StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
+        using StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
+        using StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
 
-        int[] counts = Array.ConvertAll(sr.ReadLine().Split(' '), int.Parse);
-        string startB = "BWBWBWBWWBWBWBWB";
-        string startW = "WBWBWBWBBWBWBWBW";
+        int[] NM = Array.ConvertAll(sr.ReadLine().Split(' '), int.Parse);
 
-        var sList = new List<string>();
-        
-        for (int i = 0; i < counts[0]; i++)
+        char[] StartW = new char[]
         {
-            sList.Add(sr.ReadLine());
-        }
+            'W', 'B', 'W', 'B', 'W', 'B', 'W', 'B',
+            'B', 'W', 'B', 'W', 'B', 'W', 'B', 'W',
+            'W', 'B', 'W', 'B', 'W', 'B', 'W', 'B',
+            'B', 'W', 'B', 'W', 'B', 'W', 'B', 'W',
+            'W', 'B', 'W', 'B', 'W', 'B', 'W', 'B',
+            'B', 'W', 'B', 'W', 'B', 'W', 'B', 'W',
+            'W', 'B', 'W', 'B', 'W', 'B', 'W', 'B',
+            'B', 'W', 'B', 'W', 'B', 'W', 'B', 'W'
+        };
 
-        int idxCount = 0;
-        int minCount = 100000;
-        
-        for (int i = 0; i < sList.Count;)
+        char[] StartB = new char[]
         {
+            'B', 'W', 'B', 'W', 'B', 'W', 'B', 'W',
+            'W', 'B', 'W', 'B', 'W', 'B', 'W', 'B',
+            'B', 'W', 'B', 'W', 'B', 'W', 'B', 'W',
+            'W', 'B', 'W', 'B', 'W', 'B', 'W', 'B',
+            'B', 'W', 'B', 'W', 'B', 'W', 'B', 'W',
+            'W', 'B', 'W', 'B', 'W', 'B', 'W', 'B',
+            'B', 'W', 'B', 'W', 'B', 'W', 'B', 'W',
+            'W', 'B', 'W', 'B', 'W', 'B', 'W', 'B',
+        };
 
-            if (idxCount + 8 > counts[1])
+        string[] chess = new string[NM[0]];
+        for (int i = 0; i < NM[0]; i++) { chess[i] = sr.ReadLine(); }
+
+        int count = 9 * 9;
+
+        for (int i = 0; i < NM[0] - 7; i++)
+        {
+            for (int j = 0; j < NM[1] - 7; j++)
             {
-                i++;
-                idxCount = 0;
-            }
-            
-            if (i + 8 > counts[0])
-            {
-                break;
-            }
+                //여기부터
+                int wCount = 0;
+                int bCount = 0;
 
-            string[] arr88 = new string[8]; 
-            
-            for (int j = 0; j < 8; j++)
-            {
-                string line = sList[i];
-
-                string sub = line.Substring(idxCount,  8);
-
-                arr88[j] = sub;
-                i += 1;
-            }
-
-            string s = "";
-            int wrongCountB = 0;
-            int wrongCountW = 0;
-            
-            for (int j = 0; j < 8; j++)
-            {
-                s += arr88[j];
-
-                if (j % 2 == 1)
+                for (int k = i; k <= i + 7; k++)
                 {
-                    for (int k = 0; k < s.Length; k++)
+                    for (int l = j; l <= j + 7; l++)
                     {
-                        if (s[k] != startB[k])
-                        {
-                            wrongCountB++;
-                        }
-                        
-                        if (s[k] != startW[k])
-                        {
-                            wrongCountW++;
-                        }
+                        int ind = (k - i) * 7 + (l - j) + (k - i);
+
+
+                        if (chess[k][l] != StartW[ind]) { wCount++; }
+
+                        if (chess[k][l] != StartB[ind]) { bCount++; }
                     }
-
-                    s = "";
                 }
+                
+                count = Math.Min(count, Math.Min(wCount, bCount));
             }
-
-            int min = Math.Min(wrongCountB, wrongCountW);
-
-            if (minCount > min)
-            {
-                minCount = min;
-            }
-
-            i -= 8;
-            idxCount++;
         }
-        
-        sw.WriteLine(minCount);
-        
-        sr.Close();
-        sw.Close();
+
+        sw.Write(count);
     }
 }
