@@ -10,16 +10,16 @@ public class Solution
 
         int N = int.Parse(sr.ReadLine());
 
-        var l = new List<int>();
+        var l = new int[N];
         string[] s = sr.ReadLine().Split(' ');
         for (int i = 0; i < N; i++)
         {
             int t = int.Parse(s[i]);
             
-            l.Add(t);
+            l[i] = (t);
         }
 
-        l.Sort();
+        Array.Sort(l);
 
         int sum = 0;
         int total = 0;
