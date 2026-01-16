@@ -21,18 +21,13 @@ public class Solution
 
         l.Sort();
 
-        var arr = new int[N];
-        arr[0] = l[0];
-        for (int i = 1; i < N; i++)
-        {
-            arr[i] = arr[i-1] + l[i];
-        }
-
         int sum = 0;
+        int total = 0;
         for (int i = 0; i < N; i++)
         {
-            sum += arr[i];
+            sum += l[i];
+            total += sum;
         }
-        sw.Write(sum);
+        sw.Write(total);
     }
 }
