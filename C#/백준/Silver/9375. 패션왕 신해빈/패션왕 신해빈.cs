@@ -14,29 +14,28 @@ public class Solution
         {
             int c = int.Parse(sr.ReadLine());
 
-            var nameCategory = new Dictionary<string, List<string>>();
+            var nameCategory = new Dictionary<string, int>();
 
             //init dict
             for (int j = 0; j < c; j++)
             {
                 string[] s = sr.ReadLine().Split(' ');
 
-                if (nameCategory.TryGetValue(s[1], out var v))
+                if (nameCategory.TryGetValue(s[1], out int value))
                 {
-                    v.Add(s[0]);
+                    nameCategory[s[1]] = value + 1;
                 }
                 else
                 {
-                    nameCategory.Add(s[1], new List<string>(){s[0]});
+                    nameCategory.Add(s[1], 1);
                 }
             }
 
             //calc
-            int count = nameCategory.Count;
             int sum = 1;
             foreach (var kvp in nameCategory)
             {
-                sum *= (kvp.Value.Count + 1);
+                sum *= (kvp.Value + 1);
             }
             
             sw.WriteLine(sum-1);
