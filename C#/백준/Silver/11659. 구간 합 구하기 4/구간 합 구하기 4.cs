@@ -11,11 +11,11 @@ public class Solution
         int[] nm = Array.ConvertAll(sr.ReadLine().Split(' '), int.Parse);
 
         int[] inp = Array.ConvertAll(sr.ReadLine().Split(' '), int.Parse);
-        int[] dp = new int[nm[0]];
-        dp[0] = inp[0];
+        int[] dp = new int[nm[0] + 1];
+        dp[1] = inp[0];
         for (int i = 1; i < nm[0]; i++)
         {
-            dp[i] = dp[i - 1] + inp[i];
+            dp[i+ 1] = dp[i] + inp[i];
         }
 
         //5 9 12 14 15
@@ -24,8 +24,8 @@ public class Solution
         {
             int[] t = Array.ConvertAll(sr.ReadLine().Split(' '), int.Parse);
 
-            int t1 = dp[t[1] - 1];
-            int t2 = t[0] - 2 < 0 ? 0 : dp[t[0] - 2];
+            int t1 = dp[t[1]];
+            int t2 = dp[t[0] - 1];
             
             sw.WriteLine(t1-t2);
         }
