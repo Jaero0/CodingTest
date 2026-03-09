@@ -5,21 +5,6 @@ public class Solution
         using StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
         using StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
 
-        /**
-         * 1 1
-         * 2 11
-         * 3 111
-         * 4 2
-         * 5 21
-         * 6 211
-         * 7 2111
-         * 8 22
-         * 9 3
-         * 10 31
-         * 11 311
-         * 15 3211
-         */
-
         int N = int.Parse(sr.ReadLine());
         
         int[] count = new int[50001];
@@ -41,7 +26,7 @@ public class Solution
                 int min = 5;
                 for (int j = 2; j <= sqrt; j++)
                 {
-                    min = Math.Min(min, /*count[j * j]*/1 + count[i - j * j]);
+                    min = Math.Min(min, 1 + count[i - j * j]);
                 }
 
                 count[i] = min;
