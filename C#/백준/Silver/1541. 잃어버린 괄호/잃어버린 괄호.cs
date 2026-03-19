@@ -7,38 +7,22 @@ public class Solution
     {
         string[] s = sr.ReadLine().Split('-');
 
-        int length = s.Length;
+        int res = ParseGroup(s[0]); // 첫 번째는 더함
 
-        int[] sum = new int[length];
-        for (int i = 0; i < length; i++)
-        {
-            if (int.TryParse(s[i], out var result))
-            {
-                sum[i] = result;
-            }
-            else
-            {
-                Array.ForEach(s[i].Split('+'), ss => sum[i] += int.Parse(ss));
-            }
-        }
+        for (int i = 1; i < s.Length; i++)
+            res -= ParseGroup(s[i]); // 나머지는 뺌
 
-        if (length == 1)
-        {
-            sw.WriteLine(sum[0]);
-        }
-        else
-        {
-            int res = sum[0];
+        sw.WriteLine(res);
 
-            for (int i = 1; i < length; i++)
-            {
-                res -= sum[i];
-            }
-            
-            sw.WriteLine(res);
-        }
-        
         sr.Close();
         sw.Close();
     }
+
+    private static int ParseGroup(string token)
+    {
+        int sum = 0;
+        Array.ForEach(token.Split('+'), t => sum += int.Parse(t));
+        return sum;
+    }
+
 }
