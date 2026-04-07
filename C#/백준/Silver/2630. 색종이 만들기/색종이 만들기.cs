@@ -9,7 +9,6 @@ public class Solution
     public static void Con(List<int[]> sq, int yMin, int yMax, int xMin, int xMax)
     {
         int prv = sq[yMin][xMin];
-        bool isPass = true;
         
         for (int i = yMin; i < yMax; i++)
         {
@@ -17,8 +16,6 @@ public class Solution
             {
                 if (sq[i][j] != prv)
                 {
-                    isPass = false;
-
                     int yMid = (yMin + yMax) / 2;
                     int xMid = (xMin + xMax) / 2;
                     
@@ -35,8 +32,7 @@ public class Solution
                 }
             }
         }
-
-        if (!isPass) return;
+        
         if (prv == 1)
         {
             c1 += 1;
