@@ -6,7 +6,11 @@ public class Solution
     public static int Con(int[] tree, int aim)
     {
         int lo = 0;
-        int hi = tree.Max();
+        int hi = 0;
+        for (int i = 0; i < tree.Length; i++)
+        {
+            if (tree[i] > hi) hi = tree[i];
+        }
         int r = 0;
 
         while (lo <= hi)
@@ -14,9 +18,10 @@ public class Solution
             long sum = 0;
             int pivot = (lo + hi) / 2;
             
-            foreach (int i in tree)
+            for (int i = 0; i < tree.Length; i++)
             {
-                sum += i - pivot <= 0 ? 0 : i - pivot;
+                if (tree[i] > pivot)
+                    sum += tree[i] - pivot;
             }
 
             if (sum < aim)
