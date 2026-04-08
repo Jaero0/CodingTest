@@ -7,30 +7,33 @@ public class Solution
     
     public static void Main(string[] args)
     {
-        int[] NM = Array.ConvertAll(sr.ReadLine().Split(' '), int.Parse);
+        var input = sr.ReadLine().Split();
+        int n = int.Parse(input[0]);
+        int m = int.Parse(input[1]);
 
-        List<int>[] dict2 = new List<int>[NM[0] + 1];
+        List<int>[] dict2 = new List<int>[n + 1];
 
-        for (int i = 1; i <= NM[0]; i++)
+        for (int i = 1; i <= n; i++)
         {
             dict2[i] = new List<int>();
         }
 
         //1. init
-        for (int i = 0; i < NM[1]; i++)
+        for (int i = 0; i < m; i++)
         {
-            int[] t = Array.ConvertAll(sr.ReadLine().Split(' '), int.Parse);
+            var input2 = sr.ReadLine().Split();
+            int a = int.Parse(input2[0]);
+            int b = int.Parse(input2[1]);
 
-            dict2[t[0]].Add(t[1]);
-
-            dict2[t[1]].Add(t[0]);
+            dict2[a].Add(b);
+            dict2[b].Add(a);
         }
 
         int count = 0;
         var q = new Queue<int>();
-        bool[] visited = new bool[NM[0] + 1];
+        bool[] visited = new bool[n + 1];
 
-        for (int i = 1; i <= NM[0]; i++)
+        for (int i = 1; i <= n; i++)
         {
             if (visited[i] == true) continue;
             
@@ -43,14 +46,12 @@ public class Solution
                 int key = q.Dequeue();
                 var list = dict2[key];
 
-                foreach (int j in list)
+                foreach (var j in list)
                 {
-                    if (visited[j] == true)
-                    {
-                        continue;
-                    }
-                    q.Enqueue(j);
+                    if (visited[j]) continue;
+
                     visited[j] = true;
+                    q.Enqueue(j);
                 }
             }
         }
