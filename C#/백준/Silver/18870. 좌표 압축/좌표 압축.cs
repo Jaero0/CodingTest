@@ -1,85 +1,22 @@
 using System.Collections;
-using System.Text;
-
-public class FastReader
-{
-    private readonly Stream stream;
-    private readonly byte[] buffer = new byte[1 << 16];
-    private int len, ptr;
-
-    public FastReader(Stream stream)
-    {
-        this.stream = stream;
-    }
-
-    private byte Read()
-    {
-        if (ptr >= len)
-        {
-            len = stream.Read(buffer, 0, buffer.Length);
-            ptr = 0;
-            if (len <= 0) return 0;
-        }
-        return buffer[ptr++];
-    }
-
-    public int NextInt()
-    {
-        byte c;
-        do
-        {
-            c = Read();
-        } while (c <= 32); // 공백 제거
-
-        int sign = 1;
-        if (c == '-')
-        {
-            sign = -1;
-            c = Read();
-        }
-
-        int val = 0;
-        while (c > 32)
-        {
-            val = val * 10 + (c - '0');
-            c = Read();
-        }
-
-        return val * sign;
-    }
-
-    public string Next()
-    {
-        byte c;
-        do
-        {
-            c = Read();
-        } while (c <= 32);
-
-        var sb = new StringBuilder();
-        while (c > 32)
-        {
-            sb.Append((char)c);
-            c = Read();
-        }
-
-        return sb.ToString();
-    }
-}
 
 public class Solution
 {
-    private static FastReader sr = new FastReader(new BufferedStream(Console.OpenStandardInput()));
-    private static StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
+    private const int bufSize = 131072;
+    private static StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput(), bufSize));
+    private static StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput(), bufSize));
     
     public static void Main(string[] args)
     {
-        var n = sr.NextInt();
+        var n = int.Parse(sr.ReadLine());
 
-        int[] arr = new int[n];
+        var arr = new int[n];
+        var t = sr.ReadLine().Split(' ');
+
         for (int i = 0; i < n; i++)
-            arr[i] = sr.NextInt();
-
+        {
+            arr[i] = int.Parse(t[i]);
+        }
 
         var sorted = arr.ToArray();
         Array.Sort(sorted);
@@ -99,6 +36,7 @@ public class Solution
             sw.Write(dict[i] + " ");
         }
 
+        sr.Close();
         sw.Close();
     }
 }
