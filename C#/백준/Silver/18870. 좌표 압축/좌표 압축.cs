@@ -25,9 +25,9 @@ public class Solution
         int count = 0;
         foreach (int i in sorted)
         {
-            if (!dict.ContainsKey(i))
+            if (dict.TryAdd(i, count))
             {
-                dict[i] = count++;
+                count++;
             }
         }
 
