@@ -9,22 +9,20 @@ public class Solution
     {
         var n = int.Parse(sr.ReadLine());
 
-        var set = new SortedSet<int>();
         var list = new List<int>();
         var t = sr.ReadLine().Split(' ');
 
         foreach (string s in t)
         {
-            int st = int.Parse(s);
-
-            set.Add(st);
-            list.Add(st);
+            list.Add(int.Parse(s));
         }
-        
+
+        var sorted = list.ToList();
+        sorted.Sort();
         var dict = new Dictionary<int, int>();
 
         int count = 0;
-        foreach (int i in set)
+        foreach (int i in sorted)
         {
             if (dict.TryAdd(i, count))
             {
