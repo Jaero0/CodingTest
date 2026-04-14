@@ -16,10 +16,10 @@ public class Solution
 
         //bfs
         var q = new Queue<Tuple<int, int>>();
-        var visited = new HashSet<int>();
+        bool[] visited = new bool[100000 + 1];
 
         q.Enqueue(new Tuple<int, int>(n, 0));
-        visited.Add(n);
+        visited[n] = true;
 
         int sum = 0;
         bool isBroken = false;
@@ -32,7 +32,7 @@ public class Solution
             {
                 int mov = i == 2 ? pair.Item1 * move[i] : pair.Item1 + move[i];
                 
-                if (visited.Contains(mov) || mov < 0 || mov > 100000)
+                if (mov < 0 || mov > 100000 || visited[mov])
                 {
                     continue;
                 }
@@ -44,7 +44,7 @@ public class Solution
                     break;
                 }
 
-                visited.Add(mov);
+                visited[mov] = true;
                 q.Enqueue(new Tuple<int, int>(mov, pair.Item2 + 1));
             }
 
